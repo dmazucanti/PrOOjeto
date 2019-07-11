@@ -18,4 +18,4 @@ Sim, eu vou criar **tudo** com trocadilhos de POO
 ### Não se esqueçam que temos um grupo no telegram também ;)
  
  
-btw, se quiserem editar isso e não souberem markdown, eu usei [isso](https://www.markdownguide.org/basic-syntax/)
+btw, se quiserem editar isso e não souberem markdown, eu usei [isso](https://www.markdownguide.org/basic-syntax/ "Guia para quem absolutamente não sabe nada")
