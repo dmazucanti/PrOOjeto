@@ -16,3 +16,6 @@ Sim, eu vou criar **tudo** com trocadilhos de POO
 ## Tudo aqui é aberto para debate, vocês podem editar o arquivo ou colocar ideias que vierem a calhar. 
 
 ### Não se esqueçam que temos um grupo no telegram também ;)
+ 
+ 
+btw, se quiserem editar isso e não souberem markdown, eu usei [isso](https://www.markdownguide.org/basic-syntax/)
