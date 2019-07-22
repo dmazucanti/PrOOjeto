@@ -13,6 +13,9 @@ Sim, eu vou criar **tudo** com trocadilhos de POO
   - admin admin, como toda boa configuração padrão
   - isso pode ser instanciado como construtor padrão de gerente
   - podemos sobrecarregar o método para ter uma entrada de parâmetros de login e senha
+- Crar um arquivo para armazenar senha
+  - os construtores de login poderiam registrar um hash da senha em um txt
+  - quando logar, o programa procura o hash no arquivo
 ## Tudo aqui é aberto para debate, vocês podem editar o arquivo ou colocar ideias que vierem a calhar. 
 
 ### Não se esqueçam que temos um grupo no telegram também ;)
