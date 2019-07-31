@@ -1,20 +1,9 @@
+package pessoa;
 
-public abstract class Funcionario extends Pessoa{
-
-	private String nome;
+public abstract class Funcionario extends Pessoa {
 	
-	public Funcionario(){
-		super();
-	}
-
-	@Override
-	public void setNome(String nome){
-		super.setNome(nome);
-	}
-	
-	@Override
-	public String getNome(){
-		return super.getNome();
+	public Funcionario(String nome) {
+		super(nome);
 	}
 
 	public abstract void VisualizarAgenda();
