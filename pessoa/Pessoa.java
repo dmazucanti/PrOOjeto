@@ -6,7 +6,7 @@ public abstract  class Pessoa{
 		this.nome=nome;
 	}
 
-	public Stirng getNome(){
+	public String getNome(){
 		return nome;
 	}
 }

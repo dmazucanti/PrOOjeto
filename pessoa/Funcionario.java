@@ -9,13 +9,13 @@ public abstract class Funcionario extends Pessoa{
 
 	@Override
 	public void setNome(String nome){
-		super.getNome(nome);
+		super.setNome(nome);
 	}
 	
 	@Override
 	public String getNome(){
-		return super.setNome();
+		return super.getNome();
 	}
 
-	public abstract void visualizarAgenda();
+	public abstract void VisualizarAgenda();
 }
