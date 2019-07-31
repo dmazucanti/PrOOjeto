@@ -71,6 +71,7 @@ public class Paciente {
 	}
 	public void setOrtopedista(String ortopedista) {
 		if (!ortopedista.isEmpty() && ortopedista!=null && ortopeditaExiste)
+			//alteração de teste
 			this.ortopedista = ortopedista;
 	}
 	public String getFisiatra() {
