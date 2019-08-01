@@ -4,8 +4,9 @@ public class Medico extends Funcionario
 {
 	private String especialidade;
 
-	public Medico(String nome) {
-		super(nome);
+	public Medico(String nome, String id, String esp) {
+		super(nome, id);
+		setEspecialidade(esp);
 	}
 
 	public String getEspecialidade() {

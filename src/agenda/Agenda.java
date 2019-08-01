@@ -11,14 +11,14 @@ public class Agenda {
 
 	private BufferedWriter br;
 	private static Agenda agenda;
-	
+
 	private Agenda() throws IOException {
 		br = new BufferedWriter(new FileWriter("agenda.txt"));
 		br.write("AGENDA 2019");
 		br.newLine();
 		br.flush();
 	}
-	
+
 	public static Agenda getInstance() throws IOException {
 		if(agenda == null) {
 			agenda = new Agenda();
@@ -26,13 +26,13 @@ public class Agenda {
 		return agenda;
 	}
 	public void visualizaAgenda() throws FileNotFoundException {
-		
+
 		Scanner scan = new Scanner(new File("agenda.txt"));
 
 		while(scan.hasNext()){
-            String line = scan.nextLine().toString();
-            System.out.println(line);
-        }
+			String line = scan.nextLine().toString();
+			System.out.println(line);
+		}
 		scan.close();
 	}
 	
@@ -41,9 +41,9 @@ public class Agenda {
 			Scanner scan = new Scanner(new File("agenda.txt"));
 	
 			while(scan.hasNext()){
-	            String line = scan.nextLine().toString();
-	            System.out.println(line);
-	        }
+				String line = scan.nextLine().toString();
+				System.out.println(line);
+			}
 			scan.close();
 		}
 	public void desmarcaAgenda(String nomePac, String data, String horario) throws FileNotFoundException{
@@ -54,19 +54,19 @@ public class Agenda {
 			String novaLinha = "[" +data+ "] ["+horario+"] >> " + tipo + ", Profissional: " + nome + ", Paciente: " + nomePac;
 			
 			Scanner scan = new Scanner(new File("agenda.txt"));
-	        while(scan.hasNext()){
-	            String line = scan.nextLine().toString();
-	            if(line.contains(novaLinha)){
-	            	throw new Exception("Este profissional não está disponível nesta data e horário");
-	            }
-	        }
-	        
+			while(scan.hasNext()){
+				String line = scan.nextLine().toString();
+				if(line.contains(novaLinha)){
+					throw new Exception("Este profissional não está disponível nesta data e horário");
+				}
+			}
+
 			br.write(novaLinha);
 			br.newLine();
 			br.flush();
-			
+
 			System.out.println("Horário agendado com sucesso!");
-			
+
 		} catch (Exception e) {
 			System.out.println("Erro ao marcar na agenda: " + e);
 		}
@@ -75,5 +75,4 @@ public class Agenda {
 	public void fecharAgenda() throws IOException {
 		br.close();
 	}
-		
 }
