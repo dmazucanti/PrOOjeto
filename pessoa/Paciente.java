@@ -1,6 +1,6 @@
 package pessoa;
 
-public class Paciente {
+public class Paciente extends Pessoa {
 	private String nome;
 	private String sobrenome;
 	private String sexo;
@@ -11,6 +11,10 @@ public class Paciente {
 	private String email;
 	private String ortopedista;
 	private String fisiatra;
+
+	public Paciente(String nome) {
+		super(nome);
+	}
 	
 	public String getNome() {
 		return super.getNome();
@@ -71,6 +75,7 @@ public class Paciente {
 	}
 	public void setOrtopedista(String ortopedista) {
 		if (!ortopedista.isEmpty() && ortopedista!=null && ortopeditaExiste)
+			//alteração de teste
 			this.ortopedista = ortopedista;
 	}
 	public String getFisiatra() {
@@ -78,7 +83,7 @@ public class Paciente {
 	}
 	public void setFisiatra(String fisiatra) {
 		if (!fisiatra.isEmpty() && fisiatra!=null && fisiatraExiste)
-		this.fisiatra = fisiatra;
+			this.fisiatra = fisiatra;
 	}
 	
 	
