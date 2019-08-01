@@ -13,7 +13,7 @@ public abstract class Pessoa extends VazioException {
 		if(!nome.isEmpty() && nome != null) 
 			this.nome = nome;
 		else
-			throw new NomeVazioException(); 
+			throw new VazioException(); 
 	}
 
 	public String getNome() {
