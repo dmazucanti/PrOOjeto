@@ -6,5 +6,5 @@ public abstract class Funcionario extends Pessoa {
 		super(nome);
 	}
 
-	public abstract void VisualizarAgenda();
+	public abstract void visualizarAgenda();
 }
