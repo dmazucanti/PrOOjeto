@@ -1,4 +1,4 @@
-package pessoa;
+package src.pessoa;
 
 public abstract class Funcionario extends Pessoa {
 	
@@ -6,5 +6,4 @@ public abstract class Funcionario extends Pessoa {
 		super(nome);
 	}
 
-	public abstract void visualizarAgenda();
 }
