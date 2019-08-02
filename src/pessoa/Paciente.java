@@ -1,4 +1,4 @@
-package pessoa;
+﻿package pessoa;
 
 public class Paciente extends Pessoa {
 	private String sobrenome;
@@ -11,7 +11,7 @@ public class Paciente extends Pessoa {
 	private String ortopedista;
 	private String fisiatra;
 
-	public Paciente(String id, String senha, String nome, String sobrenome, String sexo, int idade, float altura, int peso, String telefone, String email) {
+	public Paciente(String id, String senha, String nome, String sobrenome, String sexo, int idade, float altura, int peso, String telefone, String email) throws VazioException{
 		super(id, senha, nome);
 		setSobrenome(sobrenome);
 		setSexo(sexo);
@@ -22,12 +22,9 @@ public class Paciente extends Pessoa {
 		setEmail(email);
 	}
 	
-	public String getNome() {
-		return super.getNome();
-	}
-	public void setNome(String nome) {
-		if (!nome.isEmpty() && nome!=null)
-			super.setNome(nome);
+	@Override
+	public void visualizarAgenda() {
+		
 	}
 	
 	public String getSobrenome() {
@@ -81,7 +78,6 @@ public class Paciente extends Pessoa {
 	}
 	public void setOrtopedista(String ortopedista) {
 		if (!ortopedista.isEmpty() && ortopedista!=null /*&& ortopeditaExiste*/)
-			//alteração de teste
 			this.ortopedista = ortopedista;
 	}
 	public String getFisiatra() {

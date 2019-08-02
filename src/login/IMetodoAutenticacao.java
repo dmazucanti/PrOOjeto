@@ -1,7 +1,10 @@
 package login;
+
+import pessoa.*;
 import java.io.FileNotFoundException;
 
 public interface IMetodoAutenticacao {
 
-	UsuarioAutenticado autenticar() throws UsuarioNaoAutenticadoException, FileNotFoundException;
+	Pessoa autenticar() throws UsuarioNaoAutenticadoException, FileNotFoundException;
 }
+

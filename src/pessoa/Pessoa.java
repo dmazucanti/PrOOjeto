@@ -1,4 +1,4 @@
-package src.pessoa;
+package pessoa;
 
 public abstract class Pessoa extends VazioException {
 
@@ -8,7 +8,7 @@ public abstract class Pessoa extends VazioException {
 
 	public Pessoa(String id, String senha, String nome) throws VazioException {
 		setNome(nome);
-		setSenha(senha)
+		setSenha(senha);
 		setId(id);
 	}
 

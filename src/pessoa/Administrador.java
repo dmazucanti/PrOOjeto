@@ -1,4 +1,4 @@
-package src.pessoa;
+package pessoa;
 
 import java.io.FileNotFoundException;
 

@@ -1,4 +1,4 @@
-package src.pessoa;
+package pessoa;
 
 import java.util.Scanner;
 import java.io.File;
@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Gerente extends Administrador {
+	
 	public Gerente(String id, String senha, String nome) throws VazioException {
 		super(id, senha, nome);
 	}
@@ -41,6 +42,7 @@ public class Gerente extends Administrador {
 		}
 	}
 
+	@Override
 	public void visualizarAgenda() {
 
 		System.out.println("Agenda!");
