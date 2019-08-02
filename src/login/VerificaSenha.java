@@ -1,4 +1,5 @@
 package login;
+import pessoa.*;
 import java.util.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,14 +12,6 @@ public class VerificaSenha implements IMetodoAutenticacao {
 
 	private String procuraAcesso(String arquivo, String id) throws FileNotFoundException{
 		Scanner scan = new Scanner(new File(arquivo));
-<<<<<<< Updated upstream
-		while(scan.hasNext()) {
-			String line = scan.nextLine().toString();
-			if(line.contains(id)) {
-				return line.substring(line.lastIndexOf(',') + 1).trim();
-			}
-		}
-=======
         while(scan.hasNext()){
             String line = scan.nextLine().toString();
             if(line.contains(id)){
@@ -27,7 +20,6 @@ public class VerificaSenha implements IMetodoAutenticacao {
             }
         }
 
->>>>>>> Stashed changes
 		return null;
 	}
 
@@ -36,36 +28,15 @@ public class VerificaSenha implements IMetodoAutenticacao {
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.println("Id:");
-		String id = scanner.next(); 
-		// Ainda precisamos checar se o ID e valido
-
+	    String id = scanner.next(); 
+			    
 		System.out.println("Senha:");
 		String senha = scanner.next(); 
 
+		Scanner instancia;
+		
 		String retornoSenha = null;
 		String StringAcesso = null;
-<<<<<<< Updated upstream
-		switch(id[0]) {
-			case 1:
-				retornoSenha = procuraAcesso("listaPaciente.txt", id);
-				Paciente user = new Paciente();
-				break;
-			case 2:
-				retornoSenha = procuraAcesso("listaMedico.txt", id);
-				Medico user = new Medico();
-				break;
-			case 3:
-				retornoSenha = procuraAcesso("listaTexEnfermagem.txt", id);
-				TecEnfermagem user = new TecEnfermagem();
-				break;
-			case 4:
-				retornoSenha = procuraAcesso("listaAtendente.txt", id);
-				Atendente user = new Atendente();
-				break;
-			case 5:
-				retornoSenha = procuraAcesso("listaGerente.txt", id);
-				Gerente user = new Gerente();
-=======
 		Pessoa user;
 		switch(id.charAt(0)) {
 
@@ -130,10 +101,8 @@ public class VerificaSenha implements IMetodoAutenticacao {
 					}
 				}
 				//Gerente user = new Gerente(args[0],args[1],args[2]);
->>>>>>> Stashed changes
 				break;
 		}
-		
 		scanner.close();
 		if(senha.equals(retornoSenha)){
 			return user;
