@@ -33,10 +33,10 @@ public class Agenda {
 		Scanner scan = new Scanner(new File("agenda.txt"));
 
 		while(scan.hasNext()){
-            String line = scan.nextLine().toString();
-          //trocar o id pelos nomes qdo soubermos o formato da linha
-            System.out.println(line);
-        }
+			String line = scan.nextLine().toString();
+			//trocar o id pelos nomes qdo soubermos o formato da linha
+			System.out.println(line);
+		}
 		scan.close();
 	}
 	
