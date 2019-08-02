@@ -9,7 +9,7 @@ public class VerificaSenha implements IMetodoAutenticacao {
 	public VerificaSenha() throws UsuarioNaoAutenticadoException, FileNotFoundException {
 		autenticar();
 	}
-	
+
 	private String procuraAcesso(String arquivo, String id) throws FileNotFoundException{
 		Scanner scan = new Scanner(new File(arquivo));
         while(scan.hasNext()){
@@ -19,13 +19,14 @@ public class VerificaSenha implements IMetodoAutenticacao {
             	return pswd[1].trim();
 	    }
         }
+
 		return null;
 	}
-	
+
 	@Override
 	public Pessoa autenticar() throws UsuarioNaoAutenticadoException, FileNotFoundException {
 		Scanner scanner = new Scanner(System.in);
-		
+
 		System.out.println("Id:");
 	    String id = scanner.next(); 
 			    
@@ -93,6 +94,7 @@ public class VerificaSenha implements IMetodoAutenticacao {
 					}
 				}
 				Gerente user = new Gerente(args[0],args[1],args[2]);
+
 				break;
 		}
 		scanner.close();
