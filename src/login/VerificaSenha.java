@@ -23,7 +23,7 @@ public class VerificaSenha implements IMetodoAutenticacao {
 	}
 	
 	@Override
-	public UsuarioAutenticado autenticar() throws UsuarioNaoAutenticadoException, FileNotFoundException {
+	public Pessoa autenticar() throws UsuarioNaoAutenticadoException, FileNotFoundException {
 		Scanner scanner = new Scanner(System.in);
 		
 		System.out.println("Id:");
