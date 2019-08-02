@@ -1,7 +1,6 @@
 package pessoa;
 
 public class Paciente extends Pessoa {
-	private String nome;
 	private String sobrenome;
 	private String sexo;
 	private int idade;
@@ -12,8 +11,15 @@ public class Paciente extends Pessoa {
 	private String ortopedista;
 	private String fisiatra;
 
-	public Paciente(String nome) {
-		super(nome);
+	public Paciente(String id, String senha, String nome, String sobrenome, String sexo, int idade, float altura, int peso, String telefone, String email) {
+		super(id, senha, nome);
+		setSobrenome(sobrenome);
+		setSexo(sexo);
+		setIdade(idade);
+		setAltura(altura);
+		setPeso(peso);
+		setTelefone(telefone);
+		setEmail(email);
 	}
 	
 	public String getNome() {
@@ -74,15 +80,15 @@ public class Paciente extends Pessoa {
 		return ortopedista;
 	}
 	public void setOrtopedista(String ortopedista) {
-		if (!ortopedista.isEmpty() && ortopedista!=null && ortopeditaExiste)
-			//alteração de teste
+		if (!ortopedista.isEmpty() && ortopedista!=null /*&& ortopeditaExiste*/)
+			//alteraÃ§Ã£o de teste
 			this.ortopedista = ortopedista;
 	}
 	public String getFisiatra() {
 		return fisiatra;
 	}
 	public void setFisiatra(String fisiatra) {
-		if (!fisiatra.isEmpty() && fisiatra!=null && fisiatraExiste)
+		if (!fisiatra.isEmpty() && fisiatra!=null /*&& fisiatraExiste*/)
 			this.fisiatra = fisiatra;
 	}
 	
