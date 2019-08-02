@@ -5,7 +5,7 @@ public abstract class Pessoa extends VazioException {
 	private String id;
 	private String nome;
 
-	public Pessoa(String nome, String id) throws VazioException {
+	public Pessoa(String id, String senha, String nome) throws VazioException {
 		setNome(nome);
 		setId(id);
 	}

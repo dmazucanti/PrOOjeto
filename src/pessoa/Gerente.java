@@ -4,70 +4,41 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Gerente extends Pessoa /* implements Cadastrar */ {
-	public Gerente(String nome, String id) throws VazioException {
-		super(nome, id);
+public class Gerente extends Administrador {
+	public Gerente(String id, String senha, String nome) throws VazioException {
+		super(id, senha, nome);
 	}
 
 	public void cadastrar() throws FileNotFoundException, IOException {
-		Scanner scan = new Scanner(System.in);
-		BufferedWriter bw = new BufferedWriter(new FileWriter("database/atendente.txt", true));
 
+		// Pegando informacoes / interagindo com o usuario
+		Scanner scan = new Scanner(System.in);
 		System.out.println("Cadastro de Atendente:");
-		System.out.print("Nome: "); String nome = scan.next();
+		System.out.print("Insira o nome: "); String nome = scan.next();
+		System.out.print("Insira uma senha: "); String senha = scan.next();
+		// System.out.print("Confirme a senha: "); String senhaConfirmacao = scan.next();
 
 		scan.close();
 
-		String id = geraId("database/atendente.txt");
+		//
+		String arquivo = "db/listaAtendente.txt";
+		BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo, true));
+		String id = super.geraId(arquivo);
 
 		// Tenta escrever um novo usuario
 		try {
 			bw.write(id + ", ");
+			bw.write(senha + ", ");
 			bw.write(nome + "\r\n");
 			System.out.println("Atentente cadastrado com sucesso");
 			System.out.println("Seu ID eh: " + id);
 		} finally {
 			bw.close();
 		}
-	}
-
-	private String geraId(String arquivo) throws FileNotFoundException, IOException {
-		BufferedReader br = new BufferedReader(new FileReader(arquivo));
-
-		// Busca a ultima linha
-		String ultimaLinha = "";
-		String linhaAtual = br.readLine();
-
-		while (linhaAtual != null) {
-			ultimaLinha = linhaAtual;
-			linhaAtual = br.readLine();
-		}
-		br.close();
-
-
-		// se fimDoId == -1, quer dizer que nao tem virgula no arquivo, ou seja, nao existem
-		// atendentes registrados
-		int fimDoId = ultimaLinha.indexOf(",");
-		String idNovo;
-
-		if (fimDoId != -1) {
-			String idAntigo = ultimaLinha.substring(0, ultimaLinha.indexOf(",")).trim();
-
-			int tmp = Integer.parseInt(idAntigo);
-			tmp++;
-			idNovo = String.valueOf(tmp);
-		}
-		else {
-			idNovo = "3" + "001";
-		}
-
-		return idNovo;
 	}
 
 	public void visualizarAgenda() {
