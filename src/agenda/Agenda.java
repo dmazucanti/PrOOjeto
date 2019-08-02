@@ -1,4 +1,4 @@
-package agenda;
+﻿package agenda;
 	
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -34,8 +34,8 @@ public class Agenda {
 
 		while(scan.hasNext()){
             String line = scan.nextLine().toString();
-          //trocar o id pelos nomes qdo soubermos o formato da linha
-            System.out.println(line);
+            String[] args = line.split(", ");
+            System.out.println("[" + args[0] + "] [" + args[1] +"] >> " + args[2] + ", Profissional: " + args[3] + ", Paciente: " + args[4]);
         }
 		scan.close();
 	}
@@ -47,8 +47,8 @@ public class Agenda {
 		while(scan.hasNext()){
 			String line = scan.nextLine().toString();
 			if (line.contains(id)) {
-				//trocar o id pelos nomes qdo soubermos o formato da linha
-				System.out.println(line);
+				String[] args = line.split(", ");
+	            System.out.println("[" + args[0] + "] [" + args[1] +"] >> " + args[2] + ", Profissional: " + args[3] + ", Paciente: " + args[4]);
 			}
 		}
 		scan.close();
@@ -104,15 +104,15 @@ public class Agenda {
 		
 		i=0;
 		while (agenda[i]!=null) {
-			//retirar os parâmetros da linha e colocar no metodo marca agenda para gerar o arquivo de novo
-			marcaAgenda(agenda[i]);
+			String[] args = agenda[i].split(", ");
+			marcaAgenda(args[0], args[1], args[2],args[3], args[4]);
 			i++;
 		}
 	}
 	
-	public void marcaAgenda(String tipo, String idFunc, String idPac, String data, String horario) throws FileNotFoundException{
+	public void marcaAgenda(String data, String horario, String tipo, String idFunc, String idPac) throws FileNotFoundException{
 		try {
-			String novaLinha = "[" +data+ "] ["+horario+"] >> " + tipo + ", Profissional: " + idFunc + ", Paciente: " + idPac;
+			String novaLinha = data + ", "+horario+", " + tipo + ", " + idFunc + ", " + idPac;
 			
 			Scanner scan = new Scanner(new File("agenda.txt"));
 			while(scan.hasNext()){
