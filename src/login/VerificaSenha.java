@@ -35,23 +35,23 @@ public class VerificaSenha implements IMetodoAutenticacao {
 		String StringAcesso = null;
 		switch(id.charAt(0)) {
 		case 1:
-			retornoSenha = procuraAcesso("listaPaciente.txt", id);
+			retornoSenha = procuraAcesso("../../db/listaPaciente.txt", id);
 			StringAcesso = "Paciente";
 			break;
 		case 2:
-			retornoSenha = procuraAcesso("listaMedico.txt", id);
+			retornoSenha = procuraAcesso("../../db/listaMedico.txt", id);
 			StringAcesso = "Medico";
 			break;
 		case 3:
-			retornoSenha = procuraAcesso("listaTexEnfermagem.txt", id);
+			retornoSenha = procuraAcesso("../../db/listaTexEnfermagem.txt", id);
 			StringAcesso = "Tecnico de Enfermagem";
 			break;
 		case 4:
-			retornoSenha = procuraAcesso("listaAtendente.txt", id);
+			retornoSenha = procuraAcesso("../../db/listaAtendente.txt", id);
 			StringAcesso = "Atendente";
 			break;
 		case 5:
-			retornoSenha = procuraAcesso("listaGerente.txt", id);
+			retornoSenha = procuraAcesso("../../db/listaGerente.txt", id);
 			StringAcesso = "Gerente";
 			break;
 		}
