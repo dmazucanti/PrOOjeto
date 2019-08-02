@@ -4,7 +4,7 @@ public class Medico extends Funcionario
 {
 	private String especialidade;
 
-	public Medico(String id, String senha, String nome, String esp) {
+	public Medico(String id, String senha, String nome, String esp) throws VazioException {
 		super(id, senha, nome);
 		setEspecialidade(esp);
 	}
@@ -16,8 +16,8 @@ public class Medico extends Funcionario
 		especialidade = e;
 	}
 
+	@Override
 	public void visualizarAgenda() {
 		System.out.println("Agenda");
 	}
 }
-
