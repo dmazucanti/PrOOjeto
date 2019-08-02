@@ -3,10 +3,12 @@ package src.pessoa;
 public abstract class Pessoa extends VazioException {
 
 	private String id;
+	private String senha;
 	private String nome;
 
 	public Pessoa(String id, String senha, String nome) throws VazioException {
 		setNome(nome);
+		setSenha(senha)
 		setId(id);
 	}
 
@@ -27,6 +29,14 @@ public abstract class Pessoa extends VazioException {
 
 	public String getId() {	
 		return id;
+	}
+	
+	public void setSenha (String senha) {
+		this.senha = senha;
+	}
+	
+	public String getSenha () {
+		return senha;
 	}
 
 	public abstract void visualizarAgenda();
