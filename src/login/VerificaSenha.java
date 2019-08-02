@@ -14,8 +14,9 @@ public class VerificaSenha implements IMetodoAutenticacao {
         while(scan.hasNext()){
             String line = scan.nextLine().toString();
             if(line.contains(id)){
-            	return line.substring(line.lastIndexOf(',') + 1).trim();
-            }
+		    String[] pswd = line.split(", ");
+            	return pswd[1];
+	    }
         }
 		return null;
 	}
@@ -27,15 +28,12 @@ public class VerificaSenha implements IMetodoAutenticacao {
 		System.out.println("Id:");
 	    String id = scanner.next(); 
 			    
-	    System.out.println("Tipo de Acesso: [1-Paciente] [2-Medico] [3-Tecnico de Enfermagem] [4-Atendente] [5-Gerente]");
-	    int tipoAcesso = scanner.nextInt(); 
-	    
 		System.out.println("Senha:");
 		String senha = scanner.next(); 
 		
 		String retornoSenha = null;
 		String StringAcesso = null;
-		switch(tipoAcesso) {
+		switch(id.charAt(0)) {
 		case 1:
 			retornoSenha = procuraAcesso("listaPaciente.txt", id);
 			StringAcesso = "Paciente";
