@@ -1,9 +1,9 @@
 package pessoa;
 
+import agenda.Agenda;
 import java.util.Scanner;
-import java.io.File;
+//import java.io.File;
 import java.io.FileNotFoundException;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,6 +11,74 @@ import java.io.IOException;
 public class Atendente extends Administrador {
 	public Atendente(String id, String senha, String nome) throws VazioException {
 		super(id, senha, nome);
+	}
+	
+	@Override
+	public void menu () {
+		Scanner scan = new Scanner(System.in);
+		
+		Agenda agenda = null;
+		try { 
+			agenda = Agenda.getInstance();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		int opcao;
+		
+		System.out.println("O que você quer fazer?");
+		System.out.println("1 - Visualizar agenda");
+		System.out.println("2 - Cadastrar um novo usuário");
+		System.out.println("3 - Marcar um horário na agenda");
+		System.out.println("4 - Desmarcar um horário da agenda");
+		
+		opcao = scan.nextInt();
+		switch (opcao) {
+			case 1 :
+				visualizarAgenda();
+				break;
+				
+			case 2 :
+				try {
+					cadastrar();
+				} catch (FileNotFoundException e) {
+					System.out.println(e.getMessage());
+				} catch (IOException e) {
+					System.out.println(e.getMessage());
+				}
+				break;
+				
+			case 3 :
+				System.out.println("O que você quer marcar? "); String tipo = scan.next();
+				System.out.print("Data: "); String data = scan.next();
+				System.out.print("Horario: "); String hora = scan.next();
+				System.out.print("ID funcionario: "); String idFunc = scan.next();
+				System.out.print("ID paciente: "); String idPac = scan.next();
+				
+				try {
+					agenda.marcaAgenda(data, hora, tipo, idFunc, idPac);
+				} catch (FileNotFoundException e) {
+					System.out.println(e.getMessage());
+				}
+				break;
+				
+			case 4 :
+				System.out.println("Digite o id de quem está desmarcando: "); String id = scan.next();
+				System.out.println("Digite a data: "); String datad = scan.next();
+				System.out.println("Digite o horario: "); String horario = scan.next();
+				
+				try {
+					agenda.desmarcaAgenda(id, datad, horario);
+				} catch (IOException e) {
+					System.out.println(e.getMessage());
+				}
+				break;
+		}
+	}
+	
+	@Override
+	public void visualizarAgenda(){
+		return;
 	}
 
 	@Override
@@ -20,7 +88,7 @@ public class Atendente extends Administrador {
 
 		System.out.println("Escolha a opcao de cadastro:");
 		System.out.println("[1] Paciente, [2] Tecnico de Enfermagem, [3] Medico");
-		// tratamenteo de erro e/ou do while
+		// tratamento de erro e/ou do while
 		int opcao = scan.nextInt();
 
 		String arquivo;
@@ -78,6 +146,7 @@ public class Atendente extends Administrador {
 			bw.close();
 		}
 	}
+	
 	private void cadastraTecEnfermagem() throws FileNotFoundException, IOException {
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Insira o nome: "); String nome = scan.nextLine();
@@ -104,6 +173,7 @@ public class Atendente extends Administrador {
 			bw.close();
 		}
 	}
+	
 	private void cadastraMedico() throws FileNotFoundException, IOException {
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Insira o nome: "); String nome = scan.nextLine();
@@ -126,11 +196,6 @@ public class Atendente extends Administrador {
 			bw.close();
 		}
 	}
-
-	public void visualizarAgenda(){
-		return;
-	}
-
 }
 
 // Porque nao fechar os Scanners
