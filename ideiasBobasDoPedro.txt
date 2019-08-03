@@ -7,3 +7,7 @@
 
 - Senha é invisível enquanto se digita
 	https://stackoverflow.com/questions/27050323/hide-password-from-console-window-java-asterisk-password-or-block-inputted-strin
+
+- Para aumentar a robustez do sistema, mudar o sistema de database para dados de tamanho variável do mesmo tipo.
+
+- Mensagem de bem vindo personalizada quando alguém dá login
