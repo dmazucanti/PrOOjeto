@@ -6,10 +6,6 @@ import java.io.FileNotFoundException;
 
 public class VerificaSenha{
 
-	public VerificaSenha() throws UsuarioNaoAutenticadoException, FileNotFoundException, VazioException {
-		autenticar();
-	}
-
 	private static String procuraAcesso(String arquivo, String id) throws FileNotFoundException{
 		Scanner scan = new Scanner(new File(arquivo));
         while(scan.hasNext()){
