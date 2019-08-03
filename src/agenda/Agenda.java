@@ -1,6 +1,7 @@
 package agenda;
 	
 import java.io.BufferedReader;
+import java.nio.file.*;
 import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -31,7 +32,7 @@ public class Agenda {
 	private String recuperaNome(String idPac) throws FileNotFoundException{
 		String nomePaciente = "";
 		
-		Scanner scanPac = new Scanner(new File("../../db/listaPaciente.txt"));
+		Scanner scanPac = new Scanner(new File("listaPaciente.txt"));
 		while(scanPac.hasNext()) {
 			String linePac = scanPac.nextLine().toString();
 			if(linePac.contains(idPac)) {
@@ -47,7 +48,7 @@ public class Agenda {
 		
 			//Recupera nome do médico por meio do id
         if(args[2].equals("consulta") || args[2].equals("Consulta")) {
-        	Scanner scanMed = new Scanner(new File("../../db/listaMedico.txt"));
+        	Scanner scanMed = new Scanner(new File("listaMedico.txt"));
         	while(scanMed.hasNext()) {
         		String lineMed = scanMed.nextLine().toString();
         		if(lineMed.contains(args[3])) {
@@ -59,7 +60,7 @@ public class Agenda {
         }
         else { 
         	//Recupera nome do tecnico por meio do id
-        	Scanner scanTec = new Scanner(new File("../../db/listaTecEnfermagem.txt"));
+        	Scanner scanTec = new Scanner(new File("listaTecEnfermagem.txt"));
         	while(scanTec.hasNext()) {
         		String lineTec = scanTec.nextLine().toString();
         		if(lineTec.contains(args[3])) {
@@ -74,8 +75,10 @@ public class Agenda {
 	
 	public void visualizaAgenda() throws FileNotFoundException {	
 		Scanner scan = new Scanner(new File("agenda.txt"));
+		String line = scan.nextLine().toString();
+		System.out.println(line);
 		while(scan.hasNext()){
-            String line = scan.nextLine().toString();
+            line = scan.nextLine().toString();
             String[] args = line.split(", ");
             String nomeProfissional = recuperaNome(args);
 			String nomePaciente = recuperaNome(args[4]);
@@ -87,9 +90,10 @@ public class Agenda {
 	public void visualizaAgenda(String id) throws FileNotFoundException {
 			
 		Scanner scan = new Scanner(new File("agenda.txt"));
-	
+		String line = scan.nextLine().toString();
+		System.out.println(line);
 		while(scan.hasNext()){
-			String line = scan.nextLine().toString();
+			line = scan.nextLine().toString();
 			if (line.contains(id)) {
 				String[] args = line.split(", ");
 				String nomeProfissional = recuperaNome(args);
@@ -118,13 +122,12 @@ public class Agenda {
 			buff.close();
 		}
 		return agenda;
-	}
+	}		
 	
 	public void desmarcaAgenda(String id, String data, String horario) throws IOException{
 		
 		Scanner scan = new Scanner(new File("agenda.txt"));
 		String linha = null;
-		
 		while(scan.hasNext()){
 			String line = scan.nextLine().toString();
 			if (line.contains(id) && line.contains(data) && line.contains(horario)) {
@@ -132,34 +135,42 @@ public class Agenda {
 			}
 		}
 		scan.close();
-		
+
 		String[] agenda = leDados();
 		int i = 0;
-		while (agenda[i] != linha) {
+		while (!agenda[i].equals(linha)) {
 			i++;
 		}
 		agenda[i] = null;
 		
-		while(i<agenda.length-1) {
+		while(i < agenda.length-1) {
 			agenda[i] = agenda[i+1];
 			i++;
 		}
 		
 		File file = new File("agenda.txt");
 		file.delete();
+		/*Path src = Paths.get(file.getAbsolutePath());
+		String str_dest = file.getAbsolutePath()+".bad";
+		Path dst = Paths.get(str_dest);
+		Files.move(src, dst, StandardCopyOption.REPLACE_EXISTING);*/
 		
-		i=0;
+		i=1;
+		/*System.out.println("ANTES DE MARCAR");
+		visualizaAgenda();*/
+		System.out.println();
 		while (agenda[i]!=null) {
 			String[] args = agenda[i].split(", ");
 			marcaAgenda(args[0], args[1], args[2],args[3], args[4]);
 			i++;
 		}
+		/*System.out.println("DEPOIS DE MARCAR");
+		visualizaAgenda();*/
 	}
 	
 	public void marcaAgenda(String data, String horario, String tipo, String idFunc, String idPac) throws FileNotFoundException{
-		try {
+		try {			
 			String novaLinha = data + ", "+horario+", " + tipo + ", " + idFunc + ", " + idPac;
-			
 			Scanner scan = new Scanner(new File("agenda.txt"));
 			while(scan.hasNext()){
 				String line = scan.nextLine().toString();
@@ -167,12 +178,11 @@ public class Agenda {
 					throw new Exception("Este profissional não está disponível nesta data e horário");
 				}
 			}
-	        
-			//scan.close();
+			
+			scan.close();
 			br.write(novaLinha);
 			br.newLine();
 			br.flush();
-			
 			System.out.println("Horário agendado com sucesso!");
 			
 		} catch (Exception e) {
