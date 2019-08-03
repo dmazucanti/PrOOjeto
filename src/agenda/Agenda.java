@@ -1,4 +1,4 @@
-﻿package agenda;
+package agenda;
 	
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -29,13 +29,43 @@ public class Agenda {
 		return agenda;
 	}
 	
+	private String recuperaNome(String[] args) throws FileNotFoundException{ //add exception de medico nao encontrado
+		String nomeProfissional = "";
+		
+			//Recupera nome do médico por meio do id
+        if(args[2].equals("consulta") || args[2].equals("Consulta")) {
+        	Scanner scanMed = new Scanner(new File("../../db/listaMedico.txt"));
+        	while(scanMed.hasNext()) {
+        		String lineMed = scanMed.nextLine().toString();
+        		if(lineMed.contains(args[3])) {
+        			String[] line_split = lineMed.split(", ");
+        			nomeProfissional = line_split[2];
+        			break;
+        		}
+        	}
+        }
+        else { 
+        	//Recupera nome do tecnico por meio do id
+        	Scanner scanTec = new Scanner(new File("../../db/listaTecEnfermagem.txt"));
+        	while(scanTec.hasNext()) {
+        		String lineTec = scanTec.nextLine().toString();
+        		if(lineTec.contains(args[3])) {
+        			String[] line_split = lineTec.split(", ");
+        			nomeProfissional = line_split[2];
+        			break;
+        		}
+        	}
+        }
+        return nomeProfissional;
+	}
+	
 	public void visualizaAgenda() throws FileNotFoundException {	
 		Scanner scan = new Scanner(new File("agenda.txt"));
-
 		while(scan.hasNext()){
             String line = scan.nextLine().toString();
             String[] args = line.split(", ");
-            System.out.println("[" + args[0] + "] [" + args[1] +"] >> " + args[2] + ", Profissional: " + args[3] + ", Paciente: " + args[4]);
+            String nomeProfissional = recuperaNome(args);
+            System.out.println("[" + args[0] + "] [" + args[1] +"] >> " + args[2] + ", Profissional: " + nomeProfissional + ", Paciente: " + args[4]);
         }
 		scan.close();
 	}
@@ -48,7 +78,8 @@ public class Agenda {
 			String line = scan.nextLine().toString();
 			if (line.contains(id)) {
 				String[] args = line.split(", ");
-	            System.out.println("[" + args[0] + "] [" + args[1] +"] >> " + args[2] + ", Profissional: " + args[3] + ", Paciente: " + args[4]);
+				String nomeProfissional = recuperaNome(args);
+	            System.out.println("[" + args[0] + "] [" + args[1] +"] >> " + args[2] + ", Profissional: " + nomeProfissional + ", Paciente: " + args[4]);
 			}
 		}
 		scan.close();
