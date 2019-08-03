@@ -15,18 +15,17 @@ public class Clinica {
 		Scanner scan = new Scanner (System.in);
 		Pessoa usuario = null;
 		Agenda agenda = null;
-		int log_in = 0;
+		char log_in = '0';
 		
 		try { 
 			agenda = Agenda.getInstance();
-			
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
 		
-		System.out.println("Para fazer login digite 1, para sair digite 0:");
-		log_in = scan.nextInt();
-		while (log_in == 1) {
+		System.out.println("Digite qualquer tecla para continuar. Para sair digite s: ");
+		log_in = scan.next().charAt(0);
+		while (log_in != 's') {
 			try {
 				usuario = VerificaSenha.autenticar();
 			} catch (FileNotFoundException e) {
@@ -38,73 +37,12 @@ public class Clinica {
 				System.out.println(e.getMessage());
 			}
 			
-			if (usuario instanceof Medico) {
-				try {
-					agenda.visualizaAgenda();
-				} catch (FileNotFoundException e ){
-					System.out.println(e.getMessage());
-				}
-			} 
-			else if (usuario instanceof Paciente) {
-				try {
-					System.out.println("Id = " + usuario.getId());
-					agenda.visualizaAgenda(usuario.getId());
-				} catch (FileNotFoundException e ){
-					System.out.println(e.getMessage());
-				}
-			}
-			else if (usuario instanceof Gerente) {
-				int opcao;
-				System.out.println("O que você quer fazer?");
-				System.out.println("1 - Visualizar agenda");
-				System.out.println("2 - Cadastrar novo atendente");
-				opcao = scan.nextInt();
-				switch (opcao) {
-					case 1 :
-						try {
-							agenda.visualizaAgenda();
-						} catch (FileNotFoundException e ) {
-							System.out.println(e.getMessage());
-						}
-						break;
-					case 2 :
-						try {
-							((Gerente) usuario).cadastrar();
-						} catch (FileNotFoundException e) {
-							System.out.println(e.getMessage());
-						} catch (IOException e) {
-							System.out.println(e.getMessage());
-						}
-						break;
-				}
-			} else if (usuario instanceof Atendente){
-				int opcao;
-				System.out.println("O que você quer fazer?");
-				System.out.println("1 - Visualizar agenda");
-				System.out.println("2 - Cadastrar novo usuário");
-				System.out.println("");
-				opcao = scan.nextInt();
-				switch (opcao) {
-					case 1 :
-						try {
-							agenda.visualizaAgenda();
-						} catch (FileNotFoundException e ) {
-							System.out.println(e.getMessage());
-						}
-						break;
-					case 2 :
-						try {
-							((Gerente) usuario).cadastrar();
-						} catch (FileNotFoundException e) {
-							System.out.println(e.getMessage());
-						} catch (IOException e) {
-							System.out.println(e.getMessage());
-						}
-						break;
-				}
-			}
-			System.out.println("Para fazer login digite 1, para sair digite 0:");
-			log_in = scan.nextInt();
+			
+			if (usuario!=null)
+				usuario.menu();
+			
+			System.out.println("Digite qualquer tecla para continuar. Para sair digite s: ");
+			log_in = scan.next().charAt(0);
 		}
 		scan.close();
 		System.out.println("Fim!");

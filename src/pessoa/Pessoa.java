@@ -11,6 +11,8 @@ public abstract class Pessoa extends VazioException {
 		setSenha(senha);
 		setId(id);
 	}
+	
+	public abstract void menu ();
 
 	public void setNome(String nome) throws VazioException {
 		if(!nome.isEmpty() && nome != null) 

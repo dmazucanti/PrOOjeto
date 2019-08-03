@@ -15,6 +15,40 @@ public class Gerente extends Administrador {
 	}
 
 	@Override
+	public void menu () {
+		Scanner scan = new Scanner(System.in);
+		
+		int opcao;
+		
+		System.out.println("O que você quer fazer?");
+		System.out.println("1 - Visualizar agenda");
+		System.out.println("2 - Cadastrar um novo atendente");
+		
+		opcao = scan.nextInt();
+		switch (opcao) {
+			case 1 :
+				visualizarAgenda();
+				break;
+			case 2 :
+				try {
+				 cadastrar();
+				} catch (FileNotFoundException e) {
+					e.getMessage();
+				} catch (IOException e) {
+					e.getMessage();
+				}
+				break;
+		}
+		
+	}
+	
+	
+	@Override
+	public void visualizarAgenda() {
+		System.out.println("Agenda!");
+	}
+	
+	@Override
 	public void cadastrar() throws FileNotFoundException, IOException {
 
 		// Pegando informacoes / interagindo com o usuario
@@ -39,13 +73,6 @@ public class Gerente extends Administrador {
 			bw.close();
 		}
 	}
-
-	@Override
-	public void visualizarAgenda() {
-
-		System.out.println("Agenda!");
-	}
-
 }
 
 //String id = ultimaLinha.charAt(0);

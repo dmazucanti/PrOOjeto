@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 
-
-
 public class Paciente extends Pessoa {
 	private String sobrenome;
 	private String sexo;
@@ -29,8 +27,25 @@ public class Paciente extends Pessoa {
 	}
 	
 	@Override
-	public void visualizarAgenda() {
+	public void menu () {
+		Scanner scan = new Scanner(System.in);
 		
+		int opcao;
+		
+		System.out.println("O que você quer fazer?");
+		System.out.println("1 - Visualizar agenda");
+		
+		opcao = scan.nextInt();
+		switch (opcao) {
+			case 1 :
+				visualizarAgenda();
+				break;
+		}
+		
+	}
+	
+	@Override
+	public void visualizarAgenda() {
 	}
 	
 	private boolean profissionalExiste(String id, String file) throws FileNotFoundException {
