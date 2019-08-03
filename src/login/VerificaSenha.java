@@ -28,7 +28,7 @@ public class VerificaSenha implements IMetodoAutenticacao {
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.println("Id:");
-	    String id = scanner.next(); 
+		String id = scanner.next(); 
 			    
 		System.out.println("Senha:");
 		String senha = scanner.next(); 

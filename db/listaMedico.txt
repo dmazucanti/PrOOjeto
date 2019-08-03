@@ -1,4 +1,2 @@
 3 - Medico
-medico.111, 125690
-medico.123, minhasenha999
-medico.989, medporamor1
+30001, 123, Doutor, Joelho

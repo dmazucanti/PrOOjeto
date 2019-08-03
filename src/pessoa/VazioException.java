@@ -1,4 +1,4 @@
-package pessoa;
+package src.pessoa;
 
 public class VazioException extends Exception
 {

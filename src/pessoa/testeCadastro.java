@@ -5,11 +5,13 @@ import java.io.IOException;
 
 public class testeCadastro
 {
-	public static void main(String args[])
-	{
+	public static void main(String args[]) {
+
 		try {
 			Gerente g = new Gerente("10001", "12345", "Sergio");
 			g.cadastrar();
+			Atendente a = new Atendente("10001", "12345", "Sergio");
+			a.cadastrar();
 		} catch (FileNotFoundException e) {
 			System.out.println("Erro: Arquivo nao encontrado! " + e.getMessage());
 		} catch (IOException e) {

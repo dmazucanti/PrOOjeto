@@ -1,4 +1,4 @@
-package pessoa;
+package src.pessoa;
 
 import java.util.Scanner;
 import java.io.File;
@@ -14,6 +14,7 @@ public class Gerente extends Administrador {
 		super(id, senha, nome);
 	}
 
+	@Override
 	public void cadastrar() throws FileNotFoundException, IOException {
 
 		// Pegando informacoes / interagindo com o usuario
@@ -23,9 +24,6 @@ public class Gerente extends Administrador {
 		System.out.print("Insira uma senha: "); String senha = scan.next();
 		// System.out.print("Confirme a senha: "); String senhaConfirmacao = scan.next();
 
-		scan.close();
-
-		//
 		String arquivo = "db/listaAtendente.txt";
 		BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo, true));
 		String id = super.geraId(arquivo);
@@ -35,8 +33,8 @@ public class Gerente extends Administrador {
 			bw.write(id + ", ");
 			bw.write(senha + ", ");
 			bw.write(nome + "\r\n");
-			System.out.println("Atentente cadastrado com sucesso");
-			System.out.println("Seu ID eh: " + id);
+			System.out.println("Atendente cadastrado com sucesso");
+			System.out.println("O ID gerado eh: " + id);
 		} finally {
 			bw.close();
 		}
