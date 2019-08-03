@@ -70,7 +70,7 @@ public class VerificaSenha{
 				}
 				break;
 			case '4':
-				System.out.println("Entrou em Atendente");
+				//System.out.println("Entrou em Atendente");
 				retornoSenha = procuraAcesso("listaAtendente.txt", id);
 				instancia = new Scanner(new File("listaAtendente.txt"));
 				while(instancia.hasNext()){
