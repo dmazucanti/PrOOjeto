@@ -23,7 +23,7 @@ public class Clinica {
 			System.out.println(e.getMessage());
 		}
 		
-		System.out.println("Digite qualquer tecla para continuar. Para sair digite s: ");
+		System.out.println("Digite qualquer tecla para fazer login. Para sair digite s: ");
 		log_in = scan.next().charAt(0);
 		while (log_in != 's') {
 			try {
@@ -41,7 +41,7 @@ public class Clinica {
 			if (usuario!=null)
 				usuario.menu();
 			
-			System.out.println("Digite qualquer tecla para continuar. Para sair digite s: ");
+			System.out.println("Digite qualquer tecla para fazer login. Para sair digite s: ");
 			log_in = scan.next().charAt(0);
 		}
 		scan.close();

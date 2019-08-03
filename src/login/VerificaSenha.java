@@ -47,17 +47,6 @@ public class VerificaSenha{
 				}
 				break;
 			case '2':
-				retornoSenha = procuraAcesso("listaMedico.txt", id);
-				instancia = new Scanner(new File("listaMedico.txt"));
-				while(instancia.hasNext()){
-					String registro = instancia.nextLine().toString();
-					if(registro.contains(id)){
-						String[] args = registro.split(", ");
-						user = new Medico(args[0],args[1],args[2],args[3]);
-					}
-				}
-				break;
-			case '3':
 				retornoSenha = procuraAcesso("listaTecEnfermagem.txt", id);
 				instancia = new Scanner(new File("listaTecEnfermagem.txt"));
 				while(instancia.hasNext()){
@@ -69,7 +58,19 @@ public class VerificaSenha{
 					}
 				}
 				break;
-			case 4:
+			case '3':
+				retornoSenha = procuraAcesso("listaMedico.txt", id);
+				instancia = new Scanner(new File("listaMedico.txt"));
+				while(instancia.hasNext()){
+					String registro = instancia.nextLine().toString();
+					if(registro.contains(id)){
+						String[] args = registro.split(", ");
+						user = new Medico(args[0],args[1],args[2],args[3]);
+					}
+				}
+				break;
+			case '4':
+				//System.out.println("Entrou em Atendente");
 				retornoSenha = procuraAcesso("listaAtendente.txt", id);
 				instancia = new Scanner(new File("listaAtendente.txt"));
 				while(instancia.hasNext()){
