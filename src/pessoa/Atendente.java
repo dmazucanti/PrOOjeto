@@ -122,7 +122,7 @@ public class Atendente extends Administrador {
 		System.out.print("Insira o fisiatra: "); String fisiatra = scan.nextLine();
 		System.out.print("Insira uma senha: "); String senha = scan.nextLine();
 
-		String arquivo = "../db/listaPaciente.txt";
+		String arquivo = "listaPaciente.txt";
 		BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo, true));
 		String id = super.geraId(arquivo);
 
@@ -139,7 +139,7 @@ public class Atendente extends Administrador {
 			bw.write(telefone + ", ");
 			bw.write(email + ", ");
 			bw.write(ortopedista + ", ");
-			bw.write(fisiatra + ", ");
+			bw.write(fisiatra + "\r\n");
 			System.out.println("Paciente cadastrado com sucesso");
 			System.out.println("O ID gerado eh: " + id);
 		} finally {
@@ -156,7 +156,7 @@ public class Atendente extends Administrador {
 
 		String exames[] = stringExames.split(" ");
 
-		String arquivo = "../db/listaTecEnfermagem.txt";
+		String arquivo = "listaTecEnfermagem.txt";
 		BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo, true));
 		String id = super.geraId(arquivo);
 
@@ -180,7 +180,7 @@ public class Atendente extends Administrador {
 		System.out.print("Indique a especialidade: "); String especialidade = scan.nextLine();
 		System.out.print("Insira uma senha: "); String senha = scan.nextLine();
 
-		String arquivo = "../db/listaMedico.txt";
+		String arquivo = "listaMedico.txt";
 		BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo, true));
 		String id = super.geraId(arquivo);
 
