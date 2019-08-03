@@ -1,5 +1,11 @@
 package pessoa;
 
+import java.io.File;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
+
+
+
 public class Paciente extends Pessoa {
 	private String sobrenome;
 	private String sexo;
@@ -25,6 +31,18 @@ public class Paciente extends Pessoa {
 	@Override
 	public void visualizarAgenda() {
 		
+	}
+	
+	private boolean profissionalExiste(String id, String file) throws FileNotFoundException {
+		Scanner scan = new Scanner(new File(file));
+		
+		while(scan.hasNext()){
+			String line = scan.nextLine().toString();
+			if (line.contains(id)) {
+				return true;
+			}
+		} 
+		return false;
 	}
 	
 	public String getSobrenome() {
@@ -76,15 +94,15 @@ public class Paciente extends Pessoa {
 	public String getOrtopedista() {
 		return ortopedista;
 	}
-	public void setOrtopedista(String ortopedista) {
-		if (!ortopedista.isEmpty() && ortopedista!=null /*&& ortopeditaExiste*/)
+	public void setOrtopedista(String ortopedista) throws FileNotFoundException{
+		if (!ortopedista.isEmpty() && ortopedista!=null && profissionalExiste(ortopedista, "../../db/listaMedico.txt"))
 			this.ortopedista = ortopedista;
 	}
 	public String getFisiatra() {
 		return fisiatra;
 	}
-	public void setFisiatra(String fisiatra) {
-		if (!fisiatra.isEmpty() && fisiatra!=null /*&& fisiatraExiste*/)
+	public void setFisiatra(String fisiatra) throws FileNotFoundException{
+		if (!fisiatra.isEmpty() && fisiatra!=null && profissionalExiste(fisiatra, "../../db/listaTecEnfermagem.txt"))
 			this.fisiatra = fisiatra;
 	}
 	
