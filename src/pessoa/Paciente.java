@@ -1,4 +1,4 @@
-﻿package pessoa;
+package pessoa;
 
 public class Paciente extends Pessoa {
 	private String sobrenome;

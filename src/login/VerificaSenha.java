@@ -1,5 +1,5 @@
 package login;
-import pessoa.*;
+import src.pessoa.*;
 import java.util.*;
 import java.io.File;
 import java.io.FileNotFoundException;

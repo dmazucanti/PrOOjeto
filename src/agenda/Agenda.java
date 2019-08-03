@@ -1,4 +1,4 @@
-﻿package agenda;
+package agenda;
 	
 import java.io.BufferedReader;
 import java.io.FileReader;
