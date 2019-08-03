@@ -54,7 +54,7 @@ public class Atendente extends Administrador {
 		System.out.print("Insira o fisiatra: "); String fisiatra = scan.nextLine();
 		System.out.print("Insira uma senha: "); String senha = scan.nextLine();
 
-		String arquivo = "../../db/listaPaciente.txt";
+		String arquivo = "../db/listaPaciente.txt";
 		BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo, true));
 		String id = super.geraId(arquivo);
 
@@ -87,7 +87,7 @@ public class Atendente extends Administrador {
 
 		String exames[] = stringExames.split(" ");
 
-		String arquivo = "../../db/listaTecEnfermagem.txt";
+		String arquivo = "../db/listaTecEnfermagem.txt";
 		BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo, true));
 		String id = super.geraId(arquivo);
 
@@ -110,7 +110,7 @@ public class Atendente extends Administrador {
 		System.out.print("Indique a especialidade: "); String especialidade = scan.nextLine();
 		System.out.print("Insira uma senha: "); String senha = scan.nextLine();
 
-		String arquivo = "../../db/listaMedico.txt";
+		String arquivo = "../db/listaMedico.txt";
 		BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo, true));
 		String id = super.geraId(arquivo);
 
@@ -133,3 +133,9 @@ public class Atendente extends Administrador {
 
 }
 
+// Porque nao fechar os Scanners
+// https://stackoverflow.com/questions/13042008/java-util-nosuchelementexception-scanner-reading-user-input
+
+// Como resolver
+// https://stackoverflow.com/questions/25506240/how-to-close-a-scanner-without-closing-the-underlying-system-in
+// https://stackoverflow.com/questions/14962082/close-scanner-without-closing-system-in

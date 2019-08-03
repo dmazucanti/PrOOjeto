@@ -1,2 +1,3 @@
 3 - Medico
 30001, 123, Doutor, Joelho
+30002, 55555, teste, Apoio emocional
