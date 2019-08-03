@@ -1,4 +1,4 @@
-package src.pessoa;
+package pessoa;
 
 import java.util.Scanner;
 import java.io.File;
@@ -24,7 +24,7 @@ public class Gerente extends Administrador {
 		System.out.print("Insira uma senha: "); String senha = scan.next();
 		// System.out.print("Confirme a senha: "); String senhaConfirmacao = scan.next();
 
-		String arquivo = "db/listaAtendente.txt";
+		String arquivo = "../../db/listaAtendente.txt";
 		BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo, true));
 		String id = super.geraId(arquivo);
 
