@@ -12,7 +12,7 @@ public class Exames {
 	private static Exames exames;
 	
 	private Exames() throws IOException {
-		br = new BufferedWriter(new FileWriter("exames.txt"));
+		br = new BufferedWriter(new FileWriter("/../db/exames.txt"));
 		br.write("LISTA DE EXAMES");
 		br.newLine();
 		br.flush();
@@ -29,7 +29,7 @@ public class Exames {
 	//registro de novos exames na lista
 	public void registraExame(String nomeExame) {
 		try {			
-			Scanner scan = new Scanner(new File("exames.txt"));
+			Scanner scan = new Scanner(new File("/../db/exames.txt"));
 			while(scan.hasNext()){
 				String line = scan.nextLine().toString();
 				//caso o exame já esteja registrado, retorna exceção
@@ -50,7 +50,7 @@ public class Exames {
 	}
 	
 	public void visualizarExames() throws FileNotFoundException{
-		Scanner scanV = new Scanner(new File("exames.txt"));
+		Scanner scanV = new Scanner(new File("/../db/exames.txt"));
 		//imprime o cabeçalho do arquivo
 		String line = scanV.nextLine().toString();
 		System.out.println(line);
