@@ -19,3 +19,5 @@
 - Anotar na cabecalho da database o que eh cada campo
 
 - separar os campos da database com tab para ficar alinhado
+
+- Confirmar as informacoes durante o cadastro

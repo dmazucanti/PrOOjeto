@@ -32,8 +32,6 @@ public abstract class Administrador extends Pessoa {
 			String info[] = pegaInformacoes(opcao);
 			// Decide qual o arquivo sera usado
 			String arquivo = tipoDeArquivo(opcao);
-			// Confirma cadastro
-
 			// Tenta escrever no arquivo
 			escreveInformacoes(arquivo, info);
 			// Informa o sucesso
