@@ -26,11 +26,11 @@ public class Atendente extends Administrador {
 		
 		int opcao;
 		
-		System.out.println("O que você quer fazer?");
+		System.out.println("O que voce quer fazer?");
 		System.out.println("1 - Visualizar agenda");
-		System.out.println("2 - Cadastrar um novo usuário");
-		System.out.println("3 - Marcar um horário na agenda");
-		System.out.println("4 - Desmarcar um horário da agenda");
+		System.out.println("2 - Cadastrar um novo usuario");
+		System.out.println("3 - Marcar um horario na agenda");
+		System.out.println("4 - Desmarcar um horario da agenda");
 		
 		opcao = scan.nextInt();
 		switch (opcao) {
@@ -49,7 +49,7 @@ public class Atendente extends Administrador {
 				break;
 				
 			case 3 :
-				System.out.println("O que você quer marcar? "); String tipo = scan.next();
+				System.out.println("O que voce quer marcar? "); String tipo = scan.next();
 				System.out.print("Data: "); String data = scan.next();
 				System.out.print("Horario: "); String hora = scan.next();
 				System.out.print("ID funcionario: "); String idFunc = scan.next();
@@ -63,7 +63,7 @@ public class Atendente extends Administrador {
 				break;
 				
 			case 4 :
-				System.out.println("Digite o id de quem está desmarcando: "); String id = scan.next();
+				System.out.println("Digite o id de quem esta desmarcando: "); String id = scan.next();
 				System.out.println("Digite a data: "); String datad = scan.next();
 				System.out.println("Digite o horario: "); String horario = scan.next();
 				
@@ -81,122 +81,108 @@ public class Atendente extends Administrador {
 		return;
 	}
 
+
 	@Override
-	public void cadastrar() throws FileNotFoundException, IOException {
+	protected int opcaoDeCadastro() {
 		// Pegando informacoes / interagindo com o usuario
 		Scanner scan = new Scanner(System.in);
 
 		System.out.println("Escolha a opcao de cadastro:");
-		System.out.println("[1] Paciente, [2] Tecnico de Enfermagem, [3] Medico");
-		// tratamento de erro e/ou do while
-		int opcao = scan.nextInt();
+		System.out.println("[1] Paciente, [2] Tecnico de Enfermagem, [3] Medico, [Outro] Cancela Cadastro");
+		// Pode gerar uma InputMismatchException
+		// int opcao = scan.nextInt();
+		
+		String tmp = scan.next();
+		int opcao = 0;
+		try {
+			opcao = Integer.parseInt(tmp);
+		} catch (Exception e) {
+			return -1;
+		}
 
-		String arquivo;
-		switch(opcao) {
+		return (((opcao > 0) && (opcao < 4)) ? (opcao) : (-1));
+	}
+	@Override
+	protected String[] pegaInformacoes(int opcao) {
+		Scanner scan = new Scanner(System.in);
+
+		String extrasProfissao = "";
+		System.out.print("Insira o nome: "); String nome = scan.nextLine();
+		switch (opcao) {
 			case 1:
-				System.out.println("Cadastro de Paciente");
-				cadastraPaciente();
+				System.out.print("Insira o sobrenome: ");
+				extrasProfissao = extrasProfissao.concat(scan.nextLine() + " ");
+				System.out.print("Insira o sexo: ");
+				extrasProfissao = extrasProfissao.concat(scan.nextLine() + " ");
+				System.out.print("Insira a idade: ");
+				extrasProfissao = extrasProfissao.concat(scan.nextLine() + " ");
+				System.out.print("Insira a altura: ");
+				extrasProfissao = extrasProfissao.concat(scan.nextLine() + " ");
+				System.out.print("Insira o peso: ");
+				extrasProfissao = extrasProfissao.concat(scan.nextLine() + " ");
+				System.out.print("Insira o telefone: ");
+				extrasProfissao = extrasProfissao.concat(scan.nextLine() + " ");
+				System.out.print("Insira o e-mail: ");
+				extrasProfissao = extrasProfissao.concat(scan.nextLine() + " ");
+				System.out.print("Insira o ortopedista: ");
+				extrasProfissao = extrasProfissao.concat(scan.nextLine() + " ");
+				System.out.print("Insira o fisiatra: ");
+				extrasProfissao = extrasProfissao.concat(scan.nextLine());
 				break;
 			case 2:
-				System.out.println("Cadastro de Tecnico de Enfermagem:");
-				cadastraTecEnfermagem();
+				// Decidir formato
+				System.out.print("Insira os tipos de exames: ");
+				extrasProfissao = extrasProfissao.concat(scan.nextLine());
 				break;
 			case 3:
-				System.out.println("Cadastro de Medico:");
-				cadastraMedico();
+				System.out.print("Indique a especialidade: ");
+				extrasProfissao = extrasProfissao.concat(scan.nextLine());
 				break;
 		}
-	}
-
-	private void cadastraPaciente() throws FileNotFoundException, IOException {
-		Scanner scan = new Scanner(System.in);
-		System.out.print("Insira o nome: "); String nome = scan.nextLine();
-		System.out.print("Insira o sobrenome: "); String sobrenome = scan.nextLine();
-		System.out.print("Insira o sexo: "); String sexo = scan.nextLine();
-		System.out.print("Insira a idade: "); String idade = scan.nextLine();
-		System.out.print("Insira a altura: "); String altura = scan.nextLine();
-		System.out.print("Insira o peso: "); String peso = scan.nextLine();
-		System.out.print("Insira o telefone: "); String telefone = scan.nextLine();
-		System.out.print("Insira o e-mail: "); String email = scan.nextLine();
-		System.out.print("Insira o ortopedista: "); String ortopedista = scan.nextLine();
-		System.out.print("Insira o fisiatra: "); String fisiatra = scan.nextLine();
 		System.out.print("Insira uma senha: "); String senha = scan.nextLine();
 
-		String arquivo = "listaPaciente.txt";
-		BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo, true));
-		String id = super.geraId(arquivo);
+		String info = "";
+		info = info.concat(senha+" ").concat(nome+" ").concat(extrasProfissao);
 
-		// Tenta escrever um novo usuario
-		try {
-			bw.write(id + ", ");
-			bw.write(senha + ", ");
-			bw.write(nome + ", ");
-			bw.write(sobrenome + ", ");
-			bw.write(sexo + ", ");
-			bw.write(idade + ", ");
-			bw.write(altura + ", ");
-			bw.write(peso + ", ");
-			bw.write(telefone + ", ");
-			bw.write(email + ", ");
-			bw.write(ortopedista + ", ");
-			bw.write(fisiatra + "\r\n");
-			System.out.println("Paciente cadastrado com sucesso");
-			System.out.println("O ID gerado eh: " + id);
-		} finally {
-			bw.close();
+		String vetorInfo[] = info.split(" ");
+
+		return vetorInfo;
+	}
+	@Override
+	protected String tipoDeArquivo(int opcao) {
+		switch (opcao) {
+			case 1:
+				return "../db/listaPaciente.txt";
+			case 2:
+				return "../db/listaTecEnfermagem.txt";
+			default:
+				return "../db/listaMedico.txt";
 		}
 	}
-	
-	private void cadastraTecEnfermagem() throws FileNotFoundException, IOException {
-		Scanner scan = new Scanner(System.in);
-		System.out.print("Insira o nome: "); String nome = scan.nextLine();
-		// Decidir formato
-		System.out.print("Insira os tipos de exames: "); String stringExames = scan.nextLine();
-		System.out.print("Insira uma senha: "); String senha = scan.nextLine();
-
-		String exames[] = stringExames.split(" ");
-
-		String arquivo = "listaTecEnfermagem.txt";
-		BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo, true));
-		String id = super.geraId(arquivo);
-
-		// Tenta escrever um novo usuario
-		try {
-			bw.write(id + ", ");
-			bw.write(senha + ", ");
-			bw.write(nome + ", ");
-			for(int i=0; i < exames.length-1; i++) bw.write(exames[i] + ", "); 
-			bw.write(exames[exames.length-1] + "\r\n");
-			System.out.println("Tecnico de enfermagem cadastrado com sucesso");
-			System.out.println("O ID gerado eh: " + id);
-		} finally {
-			bw.close();
-		}
-	}
-	
-	private void cadastraMedico() throws FileNotFoundException, IOException {
-		Scanner scan = new Scanner(System.in);
-		System.out.print("Insira o nome: "); String nome = scan.nextLine();
-		System.out.print("Indique a especialidade: "); String especialidade = scan.nextLine();
-		System.out.print("Insira uma senha: "); String senha = scan.nextLine();
-
-		String arquivo = "listaMedico.txt";
-		BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo, true));
-		String id = super.geraId(arquivo);
-
-		// Tenta escrever um novo usuario
-		try {
-			bw.write(id + ", ");
-			bw.write(senha + ", ");
-			bw.write(nome + ", ");
-			bw.write(especialidade + "\r\n");
-			System.out.println("Medico cadastrado com sucesso");
-			System.out.println("ID gerado: " + id);
-		} finally {
-			bw.close();
+	@Override
+	protected void notificaSucesso(int opcao) {
+		// Talvez pudessemos passar so a string do tipo de pessoa e concatenar com o resto
+		// da frase
+		switch (opcao) {
+			case 1:
+				System.out.println("Paciente cadastrado com sucesso!");
+				break;
+			case 2:
+				System.out.println("Tecnico de Enfermagem cadastrado com sucesso!");
+				break;
+			default:
+				System.out.println("Medico cadastrado com sucesso!");
+				break;
 		}
 	}
 }
+
+
+// Talvez Strategy realmente fosse melhor :c
+// Para adicionar um novo tipo de pessoa teriamos que mexer em todos esses metodos
+
+// InputMismatchException
+// https://stackoverflow.com/questions/14027537/why-am-i-getting-inputmismatchexception#14027583
 
 // Porque nao fechar os Scanners
 // https://stackoverflow.com/questions/13042008/java-util-nosuchelementexception-scanner-reading-user-input

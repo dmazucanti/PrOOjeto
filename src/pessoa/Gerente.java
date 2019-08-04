@@ -4,8 +4,6 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class Gerente extends Administrador {
@@ -20,7 +18,7 @@ public class Gerente extends Administrador {
 		
 		int opcao;
 		
-		System.out.println("O que você quer fazer?");
+		System.out.println("O que voce quer fazer?");
 		System.out.println("1 - Visualizar agenda");
 		System.out.println("2 - Cadastrar um novo atendente");
 		
@@ -47,10 +45,17 @@ public class Gerente extends Administrador {
 	public void visualizarAgenda() {
 		System.out.println("Agenda!");
 	}
-	
-	@Override
-	public void cadastrar() throws FileNotFoundException, IOException {
 
+	@Override
+	protected int opcaoDeCadastro() {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Digite: [C] para cancelar e qualquer outra tecla para continuar");
+		if (scan.next().charAt(0) == 'C') return -1;
+		return 4;
+	}
+
+	@Override
+	protected String[] pegaInformacoes(int opcao) {
 		// Pegando informacoes / interagindo com o usuario
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Cadastro de Atendente:");
@@ -58,24 +63,26 @@ public class Gerente extends Administrador {
 		System.out.print("Insira uma senha: "); String senha = scan.next();
 		// System.out.print("Confirme a senha: "); String senhaConfirmacao = scan.next();
 
-		String arquivo = "../db/listaAtendente.txt";
-		BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo, true));
-		String id = super.geraId(arquivo);
+		String info = "";
+		info = info.concat(senha).concat(" "+nome);
 
-		// Tenta escrever um novo usuario
-		try {
-			bw.write(id + ", ");
-			bw.write(senha + ", ");
-			bw.write(nome + "\r\n");
-			System.out.println("Atendente cadastrado com sucesso");
-			System.out.println("O ID gerado eh: " + id);
-		} finally {
-			bw.close();
-		}
+		String vetorInfo[] = info.split(" ");
+
+		return vetorInfo;
 	}
+
+	@Override
+	protected String tipoDeArquivo(int opcao) {
+		return "../db/listaAtendente.txt";
+	}
+
+	@Override
+	protected void notificaSucesso(int opcao) {
+		System.out.println("Atendente cadastrado com sucesso!");
+	}
+
 }
 
-//String id = ultimaLinha.charAt(0);
 
 /* Referencias
 https://stackoverflow.com/questions/17509781/how-to-read-last-line-in-a-text-file-using-java

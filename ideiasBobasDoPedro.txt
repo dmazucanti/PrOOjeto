@@ -2,6 +2,7 @@
   marcas as consultas e tudo mais)
 
 - No cadastro é pedido uma confirmação da senha
+- Senha nao pode ser vazia, com menos de X digitos etc
 
 - Todo usuário pode alterar sua própria senha
 	(talvez toda senha seja cadastrada de uma forma (ex.: 00000) e no primeiro login a pessoa é requisitada para alterar a senha.
@@ -14,3 +15,7 @@
 - Mensagem de bem vindo personalizada quando alguém dá login
 
 - A agenda poderia conseguir o ano atual sempre
+
+- Anotar na cabecalho da database o que eh cada campo
+
+- separar os campos da database com tab para ficar alinhado

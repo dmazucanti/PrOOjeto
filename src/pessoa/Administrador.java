@@ -2,9 +2,15 @@ package pessoa;
 
 import java.io.FileNotFoundException;
 
+import java.io.BufferedWriter;
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
+
+import java.util.Scanner;
+import java.util.InputMismatchException;
+
 
 public abstract class Administrador extends Pessoa {
 
@@ -12,42 +18,53 @@ public abstract class Administrador extends Pessoa {
 		super(id, senha, nome);
 	}
 
-	public abstract void cadastrar() throws FileNotFoundException, IOException; /*{
-		// Recebe o que se esta cadastrando
-		int opcao = opcaoDeCadastro();
+	public void cadastrar() throws FileNotFoundException, IOException {
+		boolean ok = false;
+		do {
+			// Escolhe o que se quer cadastrar
+			int opcao = opcaoDeCadastro();
+			// Checa se o usuario cancelou o cadastro
+			if (opcao == -1) {
+				if(confirmaCancelamento()) return;
+				else continue;
+			}
+			// Recebe as informacoes referentes a cada tipo de pessoa
+			String info[] = pegaInformacoes(opcao);
+			// Decide qual o arquivo sera usado
+			String arquivo = tipoDeArquivo(opcao);
+			// Confirma cadastro
 
-		String arquivo;
-		switch(opcao) {
-			case 1:
-				System.out.println("Cadastro de Paciente");
-				arquivo = "db/listaPaciente.txt";
-				break;
-			case 2:
-				System.out.println("Cadastro de Tecnico de Enfermagem:");
-				arquivo = "db/listaTecEnfermagem.txt";
-				break;
-			case 3:
-				System.out.println("Cadastro de Medico:");
-				arquivo = "db/listaMedico.txt";
-				break;
-			case 4:
-				System.out.println("Cadastro de Atendente:");
-				arquivo = "db/listaAtendente.txt";
-				break;
-			case 5:
-				System.out.println("Cadastro de Gerente:");
-				arquivo = "db/listaGerente.txt";
-				break;
-		}
-
+			// Tenta escrever no arquivo
+			escreveInformacoes(arquivo, info);
+			// Informa o sucesso
+			notificaSucesso(opcao);
+			ok = true;
+		} while(!ok);
 	}
 
-	private abstract int opcaoDeCadastro();
-	*/
+	protected abstract int opcaoDeCadastro();
+	private boolean confirmaCancelamento() {
+		Scanner scan = new Scanner(System.in);
 
-
-	// Acessavel por classes no mesmo pacote e pelas suas subclasses
-	protected String geraId(String arquivo) throws FileNotFoundException, IOException {
+		System.out.println("Cancelar?: [S] Cancela, [Outro] continua");
+		if(scan.next().charAt(0) == 'S') return true;
+		return false;
+	}
+	protected abstract String[] pegaInformacoes(int opcao);
+	protected abstract String tipoDeArquivo(int opcao);
+	private void escreveInformacoes(String arquivo, String[] info) throws FileNotFoundException, IOException {
+		BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo, true));
+		String id = geraId(arquivo);
+		try {
+			bw.write(id + ", ");
+			for(int i=0; i < info.length-1; i++) bw.write(info[i] + ", "); 
+				bw.write(info[info.length-1] + "\r\n");
+				System.out.println("O ID gerado eh: " + id);
+		} finally {
+			bw.close();
+		}
+	}
+	private String geraId(String arquivo) throws FileNotFoundException, IOException {
 		BufferedReader br = new BufferedReader(new FileReader(arquivo));
 
 		// Busca a ultima linha
@@ -79,6 +96,7 @@ public abstract class Administrador extends Pessoa {
 
 		return idNovo;
 	}
+	protected abstract void notificaSucesso(int opcao);
 
 }
 
