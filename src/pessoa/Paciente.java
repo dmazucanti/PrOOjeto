@@ -2,7 +2,9 @@ package pessoa;
 
 import java.io.File;
 import java.util.Scanner;
+import agenda.Agenda;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Paciente extends Pessoa {
 	private String sobrenome;
@@ -46,6 +48,17 @@ public class Paciente extends Pessoa {
 	
 	@Override
 	public void visualizarAgenda() {
+		Agenda agenda = null;
+		try { 
+			agenda = Agenda.getInstance();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			agenda.visualizaAgenda(getId());
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	private boolean profissionalExiste(String id, String file) throws FileNotFoundException {

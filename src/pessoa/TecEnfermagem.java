@@ -1,6 +1,9 @@
 package pessoa;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
+import agenda.Agenda;
 
 public class TecEnfermagem extends Pessoa {
 
@@ -30,6 +33,16 @@ public class TecEnfermagem extends Pessoa {
 	}
 	@Override
 	public void visualizarAgenda() {
-		//System.out.println("Agenda!");
+		Agenda agenda = null;
+		try { 
+			agenda = Agenda.getInstance();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			agenda.visualizaAgenda(getId());
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

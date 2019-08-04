@@ -2,7 +2,6 @@ package pessoa;
 
 import agenda.Agenda;
 import java.util.Scanner;
-//import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -78,7 +77,31 @@ public class Atendente extends Administrador {
 	
 	@Override
 	public void visualizarAgenda(){
-		return;
+		Scanner scan = new Scanner (System.in);
+		Agenda agenda = null;
+		int opcao;
+		try { 
+			agenda = Agenda.getInstance();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println("Digite 1 para visualizar a agenda geral, outro numero para visualizar a agenda de um usuário específico: ");
+		opcao = scan.nextInt();
+		if(opcao == 1) {
+			try {
+				agenda.visualizaAgenda();
+			} catch (FileNotFoundException e) {
+				System.out.println(e.getMessage());
+			}
+		} else {
+			System.out.println("Digite o ID da pessoa cuja agenda você quer visualizar: ");
+			String id = scan.next();
+			try {
+				agenda.visualizaAgenda(id);
+			} catch (FileNotFoundException e) {
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 
 	@Override

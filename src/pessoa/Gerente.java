@@ -1,6 +1,9 @@
 package pessoa;
 
 import java.util.Scanner;
+
+import agenda.Agenda;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -45,7 +48,17 @@ public class Gerente extends Administrador {
 	
 	@Override
 	public void visualizarAgenda() {
-		System.out.println("Agenda!");
+		Agenda agenda = null;
+		try { 
+			agenda = Agenda.getInstance();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			agenda.visualizaAgenda();
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	@Override
