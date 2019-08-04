@@ -12,3 +12,5 @@
 - Para aumentar a robustez do sistema, mudar o sistema de database para dados de tamanho variável do mesmo tipo.
 
 - Mensagem de bem vindo personalizada quando alguém dá login
+
+- A agenda poderia conseguir o ano atual sempre

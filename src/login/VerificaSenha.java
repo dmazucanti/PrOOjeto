@@ -8,13 +8,13 @@ public class VerificaSenha{
 
 	private static String procuraAcesso(String arquivo, String id) throws FileNotFoundException{
 		Scanner scan = new Scanner(new File(arquivo));
-        while(scan.hasNext()){
-            String line = scan.nextLine().toString();
-            if(line.contains(id)){
-            	String[] pswd = line.split(",");
-            	return pswd[1].trim();
-            }
-        }
+		while(scan.hasNext()){
+		String line = scan.nextLine().toString();
+			if(line.contains(id)){
+				String[] pswd = line.split(",");
+				return pswd[1].trim();
+			}
+		}
 
 		return null;
 	}
@@ -23,18 +23,17 @@ public class VerificaSenha{
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.println("Id:");
-	    String id = scanner.next(); 
-			    
+		String id = scanner.next(); 
+
 		System.out.println("Senha:");
 		String senha = scanner.next(); 
 
 		Scanner instancia;
-		
+
 		String retornoSenha = null;
-		
+
 		Pessoa user = null;
 		switch(id.charAt(0)) {
-
 			case '1':
 				retornoSenha = procuraAcesso("listaPaciente.txt", id);
 				instancia = new Scanner(new File("listaPaciente.txt"));
