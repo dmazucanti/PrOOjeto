@@ -18,16 +18,18 @@ public class Medico extends Pessoa {
 	public void menu () {
 		Scanner scan = new Scanner(System.in);
 		
-		int opcao;
-		
-		System.out.println("O que voce quer fazer?");
-		System.out.println("1 - Visualizar agenda");
-		
-		opcao = scan.nextInt();
-		switch (opcao) {
-			case 1 :
-				visualizarAgenda();
-				break;
+		int opcao = 0;
+		while(opcao != 2) {
+			System.out.println("O que voce quer fazer?");
+			System.out.println("1 - Visualizar agenda");
+			System.out.println("2 - Sair da conta");
+			
+			opcao = scan.nextInt();
+			switch (opcao) {
+				case 1 :
+					visualizarAgenda();
+					break;
+			}
 		}
 		
 	}
