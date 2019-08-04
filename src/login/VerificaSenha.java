@@ -1,4 +1,5 @@
 package login;
+
 import pessoa.*;
 import java.util.*;
 import java.io.File;
@@ -15,24 +16,19 @@ public class VerificaSenha{
 				return pswd[1].trim();
 			}
 		}
-
 		return null;
 	}
 
 	public static Pessoa autenticar() throws UsuarioNaoAutenticadoException, FileNotFoundException, VazioException {
 		Scanner scanner = new Scanner(System.in);
 
-		System.out.println("Id:");
-		String id = scanner.next(); 
-
-		System.out.println("Senha:");
-		String senha = scanner.next(); 
+		System.out.println("Id:"); String id = scanner.next(); 
+		System.out.println("Senha:"); String senha = scanner.next(); 
 
 		Scanner instancia;
-
 		String retornoSenha = null;
-
 		Pessoa user = null;
+		
 		switch(id.charAt(0)) {
 			case '1':
 				retornoSenha = procuraAcesso("listaPaciente.txt", id);
@@ -69,7 +65,6 @@ public class VerificaSenha{
 				}
 				break;
 			case '4':
-				//System.out.println("Entrou em Atendente");
 				retornoSenha = procuraAcesso("listaAtendente.txt", id);
 				instancia = new Scanner(new File("listaAtendente.txt"));
 				while(instancia.hasNext()){
