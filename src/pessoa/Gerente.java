@@ -14,26 +14,29 @@ public class Gerente extends Administrador {
 	@Override
 	public void menu () {
 		Scanner scan = new Scanner(System.in);
-		
-		System.out.println("O que voce quer fazer?");
-		System.out.println("1 - Visualizar agenda");
-		System.out.println("2 - Cadastrar um novo atendente");
-		
-		int opcao = scan.nextInt();
-		switch (opcao) {
-			case 1 :
-				visualizarAgenda();
-				break;
-			case 2 :
-				try {
-					cadastrar();
-				} catch (FileNotFoundException e) {
-					e.getMessage();
-				} catch (IOException e) {
-					e.getMessage();
-				}
-				break;
-		}	
+		int opcao = 0;
+		while(opcao != 3) {
+			System.out.println("O que voce quer fazer?");
+			System.out.println("1 - Visualizar agenda");
+			System.out.println("2 - Cadastrar um novo atendente");
+			System.out.println("3 - Sair da conta");
+			
+			opcao = scan.nextInt();
+			switch (opcao) {
+				case 1 :
+					visualizarAgenda();
+					break;
+				case 2 :
+					try {
+						cadastrar();
+					} catch (FileNotFoundException e) {
+						e.getMessage();
+					} catch (IOException e) {
+						e.getMessage();
+					}
+					break;
+			}	
+		}
 	}
 	
 	@Override
