@@ -1,12 +1,9 @@
 package pessoa;
 
+import agenda.Agenda;
+import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-//import java.io.FileNotFoundException;
-//import java.io.IOException;
-import java.util.Scanner;
-
-import agenda.Agenda;
 
 public class Medico extends Pessoa {
 	
@@ -53,6 +50,7 @@ public class Medico extends Pessoa {
 	public String getEspecialidade() {
 		return especialidade;
 	}
+	
 	public void setEspecialidade(String e) {
 		especialidade = e;
 	}

@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Atendente extends Administrador {
+	
 	public Atendente(String id, String senha, String nome) throws VazioException {
 		super(id, senha, nome);
 	}
@@ -36,7 +37,6 @@ public class Atendente extends Administrador {
 			case 1 :
 				visualizarAgenda();
 				break;
-				
 			case 2 :
 				try {
 					cadastrar();
@@ -46,7 +46,6 @@ public class Atendente extends Administrador {
 					System.out.println(e.getMessage());
 				}
 				break;
-				
 			case 3 :
 				System.out.println("O que você quer marcar? "); String tipo = scan.next();
 				System.out.print("Data: "); String data = scan.next();
@@ -60,7 +59,6 @@ public class Atendente extends Administrador {
 					System.out.println(e.getMessage());
 				}
 				break;
-				
 			case 4 :
 				System.out.println("Digite o id de quem está desmarcando: "); String id = scan.next();
 				System.out.println("Digite a data: "); String datad = scan.next();
@@ -80,6 +78,7 @@ public class Atendente extends Administrador {
 		Scanner scan = new Scanner (System.in);
 		Agenda agenda = null;
 		int opcao;
+		
 		try { 
 			agenda = Agenda.getInstance();
 		} catch (IOException e) {
@@ -111,7 +110,6 @@ public class Atendente extends Administrador {
 
 		System.out.println("Escolha a opcao de cadastro:");
 		System.out.println("[1] Paciente, [2] Tecnico de Enfermagem, [3] Medico");
-		// tratamento de erro e/ou do while
 		int opcao = scan.nextInt();
 
 		String arquivo;
@@ -173,7 +171,6 @@ public class Atendente extends Administrador {
 	private void cadastraTecEnfermagem() throws FileNotFoundException, IOException {
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Insira o nome: "); String nome = scan.nextLine();
-		// Decidir formato
 		System.out.print("Insira os tipos de exames: "); String stringExames = scan.nextLine();
 		System.out.print("Insira uma senha: "); String senha = scan.nextLine();
 
@@ -220,10 +217,3 @@ public class Atendente extends Administrador {
 		}
 	}
 }
-
-// Porque nao fechar os Scanners
-// https://stackoverflow.com/questions/13042008/java-util-nosuchelementexception-scanner-reading-user-input
-
-// Como resolver
-// https://stackoverflow.com/questions/25506240/how-to-close-a-scanner-without-closing-the-underlying-system-in
-// https://stackoverflow.com/questions/14962082/close-scanner-without-closing-system-in
