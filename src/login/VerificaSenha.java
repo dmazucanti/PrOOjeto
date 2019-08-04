@@ -24,12 +24,12 @@ public class VerificaSenha{
 
 		System.out.println("Id:"); String id = scanner.next(); 
 		System.out.println("Senha:"); String senha = scanner.next(); 
-
+		int key = criptog.hash(senha);//calcula hash da entrada
 		Scanner instancia;
 		String retornoSenha = null;
 		Pessoa user = null;
 		
-		switch(id.charAt(0)) {
+		switch(id.charAt(0)) {//checa o perfil de acesso baseado no primeiro digito do id e instancia o objeto apropriado
 			case '1':
 				retornoSenha = procuraAcesso("listaPaciente.txt", id);
 				instancia = new Scanner(new File("listaPaciente.txt"));
@@ -87,7 +87,8 @@ public class VerificaSenha{
 				}
 				break;
 		}
-		if(senha.equals(retornoSenha)){
+		int reg = Integer.parseInt(retornoSenha); //converte pra int o registro do hash de cadastra()
+		if(key == reg){
 			return user;
 		}
 		else {
