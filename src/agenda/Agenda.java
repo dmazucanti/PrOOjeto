@@ -98,7 +98,7 @@ public class Agenda {
 				String[] args = line.split(", ");
 				String nomeProfissional = recuperaNome(args);
 				String nomePaciente = recuperaNome(args[4]);
-	            System.out.println("[" + args[0] + "] [" + args[1] +"] >> " + args[2] + ", Profissional: " + nomeProfissional + ", Paciente: " + nomePaciente);
+				System.out.println("[" + args[0] + "] [" + args[1] +"] >> " + args[2] + ", Profissional: " + nomeProfissional + ", Paciente: " + nomePaciente);
 			}
 		}
 		scan.close();
@@ -130,6 +130,7 @@ public class Agenda {
 		String linha = null;
 		while(scan.hasNext()){
 			String line = scan.nextLine().toString();
+			// Lara, nao poderia dar um break aqui
 			if (line.contains(id) && line.contains(data) && line.contains(horario)) {
 				linha = line;
 			}
@@ -150,26 +151,39 @@ public class Agenda {
 		
 		File file = new File("../db/agenda.txt");
 		file.delete();
-		/*Path src = Paths.get(file.getAbsolutePath());
-		String str_dest = file.getAbsolutePath()+".bad";
-		Path dst = Paths.get(str_dest);
-		Files.move(src, dst, StandardCopyOption.REPLACE_EXISTING);*/
+
+		// Podiamos definir uma variavel pra esse path e-e
+		BufferedWriter bw = new BufferedWriter(new FileWriter("../db/agenda.txt"));
+
+		// ele estava tentando escrever null e quebrava
+		// isso acontecia porque agenda.length = 1000, independente de quantos nulls estao
+		// salvas nela
+		// Creio que valesse a pena salvar uma variavel com o tamanho atual do vetor
+		// dessa forma, nao perderiamos tempo como no deslocamento daquele while ali de cima
+		try {
+			for(int k=0; agenda[k] != null && k<agenda.length; k++) {
+				bw.write(agenda[k] + "\n");
+			}
+		} finally {
+			bw.close();
+		}
 		
+		// Opa, verdade, eu poderia ter usado o metodo de marcar, mas como nos ja temos as
+		// linhas no formato certo, imaginei que fosse mais facil fazer como ali em cima
+		// mesmo nao usanto tanto o ~p~o~l~i~m~o~r~f~i~s~m~o
+		/*
 		i=1;
-		/*System.out.println("ANTES DE MARCAR");
-		visualizaAgenda();*/
 		System.out.println();
 		while (agenda[i]!=null) {
 			String[] args = agenda[i].split(", ");
 			marcaAgenda(args[0], args[1], args[2],args[3], args[4]);
 			i++;
 		}
-		/*System.out.println("DEPOIS DE MARCAR");
-		visualizaAgenda();*/
+		*/
 	}
 	
 	public void marcaAgenda(String data, String horario, String tipo, String idFunc, String idPac) throws FileNotFoundException{
-		try {			
+		try {
 			String novaLinha = data + ", "+horario+", " + tipo + ", " + idFunc + ", " + idPac;
 			Scanner scan = new Scanner(new File("../db/agenda.txt"));
 			while(scan.hasNext()){

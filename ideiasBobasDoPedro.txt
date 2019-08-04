@@ -1,4 +1,5 @@
-- Os Atendentes conseguem ver uma lista de todos os pacientes
+- Os Atendentes conseguem ver uma lista de todos os pacientes (talvez ate de medicos e tecnicos para
+  marcas as consultas e tudo mais)
 
 - No cadastro é pedido uma confirmação da senha
 
