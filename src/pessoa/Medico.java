@@ -20,7 +20,7 @@ public class Medico extends Pessoa {
 		
 		int opcao;
 		
-		System.out.println("O que você quer fazer?");
+		System.out.println("O que voce quer fazer?");
 		System.out.println("1 - Visualizar agenda");
 		
 		opcao = scan.nextInt();
