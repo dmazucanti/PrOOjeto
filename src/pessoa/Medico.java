@@ -1,8 +1,9 @@
 package pessoa;
 
-//import java.io.FileNotFoundException;
-//import java.io.IOException;
+import agenda.Agenda;
 import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Medico extends Pessoa {
 	
@@ -33,12 +34,23 @@ public class Medico extends Pessoa {
 	
 	@Override
 	public void visualizarAgenda() {
-		System.out.println("Agenda");
+		Agenda agenda = null;
+		try { 
+			agenda = Agenda.getInstance();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			agenda.visualizaAgenda(getId());
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public String getEspecialidade() {
 		return especialidade;
 	}
+	
 	public void setEspecialidade(String e) {
 		especialidade = e;
 	}

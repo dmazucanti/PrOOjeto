@@ -1,12 +1,9 @@
 package clinica;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
-
-import agenda.Agenda;
 import login.*;
 import pessoa.*;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
 
 public class Clinica {
 
@@ -14,14 +11,7 @@ public class Clinica {
 		
 		Scanner scan = new Scanner (System.in);
 		Pessoa usuario = null;
-		Agenda agenda = null;
 		char log_in = '0';
-		
-		try { 
-			agenda = Agenda.getInstance();
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
 		
 		System.out.println("Digite qualquer tecla para fazer login. Para sair digite s: ");
 		log_in = scan.next().charAt(0);

@@ -1,14 +1,13 @@
-package agenda;
-	
+﻿package agenda;
+
+import java.util.Scanner;
 import java.io.BufferedReader;
-import java.nio.file.*;
 import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Agenda {
 
@@ -17,7 +16,7 @@ public class Agenda {
 	private static Agenda agenda;
 	
 	private Agenda() throws IOException {
-		br = new BufferedWriter(new FileWriter("../db/agenda.txt"));
+		br = new BufferedWriter(new FileWriter("agenda.txt"));
 		br.write("AGENDA 2019");
 		br.newLine();
 		br.flush();
@@ -29,10 +28,11 @@ public class Agenda {
 		}
 		return agenda;
 	}
+	
 	private String recuperaNome(String idPac) throws FileNotFoundException{
 		String nomePaciente = "";
 		
-		Scanner scanPac = new Scanner(new File("../db/listaPaciente.txt"));
+		Scanner scanPac = new Scanner(new File("listaPaciente.txt"));
 		while(scanPac.hasNext()) {
 			String linePac = scanPac.nextLine().toString();
 			if(linePac.contains(idPac)) {
@@ -43,12 +43,13 @@ public class Agenda {
 		}
 		return nomePaciente;
 	}
+	
 	private String recuperaNome(String[] args) throws FileNotFoundException{
 		String nomeProfissional = "";
 		
-			//Recupera nome do médico por meio do id
+	//Recupera nome do mÃ©dico por meio do id
         if(args[2].equals("consulta") || args[2].equals("Consulta")) {
-        	Scanner scanMed = new Scanner(new File("../db/listaMedico.txt"));
+        	Scanner scanMed = new Scanner(new File("listaMedico.txt"));
         	while(scanMed.hasNext()) {
         		String lineMed = scanMed.nextLine().toString();
         		if(lineMed.contains(args[3])) {
@@ -59,8 +60,8 @@ public class Agenda {
         	}
         }
         else { 
-        	//Recupera nome do tecnico por meio do id
-        	Scanner scanTec = new Scanner(new File("../db/listaTecEnfermagem.txt"));
+		//Recupera nome do tecnico por meio do id
+		Scanner scanTec = new Scanner(new File("listaTecEnfermagem.txt"));
         	while(scanTec.hasNext()) {
         		String lineTec = scanTec.nextLine().toString();
         		if(lineTec.contains(args[3])) {
@@ -74,7 +75,7 @@ public class Agenda {
 	}
 	
 	public void visualizaAgenda() throws FileNotFoundException {	
-		Scanner scan = new Scanner(new File("../db/agenda.txt"));
+		Scanner scan = new Scanner(new File("agenda.txt"));
 		String line = scan.nextLine().toString();
 		System.out.println(line);
 		while(scan.hasNext()){
@@ -89,7 +90,7 @@ public class Agenda {
 	
 	public void visualizaAgenda(String id) throws FileNotFoundException {
 			
-		Scanner scan = new Scanner(new File("../db/agenda.txt"));
+		Scanner scan = new Scanner(new File("agenda.txt"));
 		String line = scan.nextLine().toString();
 		System.out.println(line);
 		while(scan.hasNext()){
@@ -109,7 +110,7 @@ public class Agenda {
 		String linha;
 		int quant = 0; 
 
-		buff = new BufferedReader(new FileReader("../db/agenda.txt"));
+		buff = new BufferedReader(new FileReader("agenda.txt"));
 		try {
 			linha = buff.readLine();
 			while (linha != null && quant < agenda.length-1) {
@@ -126,11 +127,10 @@ public class Agenda {
 	
 	public void desmarcaAgenda(String id, String data, String horario) throws IOException{
 		
-		Scanner scan = new Scanner(new File("../db/agenda.txt"));
+		Scanner scan = new Scanner(new File("agenda.txt"));
 		String linha = null;
 		while(scan.hasNext()){
 			String line = scan.nextLine().toString();
-			// Lara, nao poderia dar um break aqui
 			if (line.contains(id) && line.contains(data) && line.contains(horario)) {
 				linha = line;
 			}
@@ -152,14 +152,9 @@ public class Agenda {
 		File file = new File("../db/agenda.txt");
 		file.delete();
 
-		// Podiamos definir uma variavel pra esse path e-e
-		BufferedWriter bw = new BufferedWriter(new FileWriter("../db/agenda.txt"));
+		BufferedWriter bw = new BufferedWriter(new FileWriter("agenda.txt"));
 
-		// ele estava tentando escrever null e quebrava
-		// isso acontecia porque agenda.length = 1000, independente de quantos nulls estao
-		// salvas nela
-		// Creio que valesse a pena salvar uma variavel com o tamanho atual do vetor
-		// dessa forma, nao perderiamos tempo como no deslocamento daquele while ali de cima
+
 		try {
 			for(int k=0; agenda[k] != null && k<agenda.length; k++) {
 				bw.write(agenda[k] + "\n");
@@ -167,46 +162,29 @@ public class Agenda {
 		} finally {
 			bw.close();
 		}
-		
-		// Opa, verdade, eu poderia ter usado o metodo de marcar, mas como nos ja temos as
-		// linhas no formato certo, imaginei que fosse mais facil fazer como ali em cima
-		// mesmo nao usanto tanto o ~p~o~l~i~m~o~r~f~i~s~m~o
-		/*
-		i=1;
-		System.out.println();
-		while (agenda[i]!=null) {
-			String[] args = agenda[i].split(", ");
-			marcaAgenda(args[0], args[1], args[2],args[3], args[4]);
-			i++;
-		}
-		*/
 	}
 	
 	public void marcaAgenda(String data, String horario, String tipo, String idFunc, String idPac) throws FileNotFoundException{
 		try {
 			String novaLinha = data + ", "+horario+", " + tipo + ", " + idFunc + ", " + idPac;
-			Scanner scan = new Scanner(new File("../db/agenda.txt"));
+			Scanner scan = new Scanner(new File("agenda.txt"));
 			while(scan.hasNext()){
 				String line = scan.nextLine().toString();
 				if(line.contains(novaLinha)){
-					throw new Exception("Este profissional não está disponível nesta data e horário");
+					throw new Exception("Este profissional nÃ£o estÃ¡ disponÃ­vel nesta data e horÃ¡rio");
 				}
 			}
-			
 			scan.close();
 			br.write(novaLinha);
 			br.newLine();
 			br.flush();
-			System.out.println("Horário agendado com sucesso!");
-			
+			System.out.println("HorÃ¡rio agendado com sucesso!");
 		} catch (Exception e) {
 			System.out.println("Erro ao marcar na agenda: " + e);
 		}
 	}
-	
 		
 	public void fecharAgenda() throws IOException {
 		br.close();
-	}
-		
+	}		
 }

@@ -2,6 +2,7 @@
   marcas as consultas e tudo mais)
 
 - No cadastro é pedido uma confirmação da senha
+- Senha nao pode ser vazia, com menos de X digitos etc
 
 - As senhas não são registradas literalmente, mas em hash
 
@@ -16,3 +17,9 @@
 - Mensagem de bem vindo personalizada quando alguém dá login
 
 - A agenda poderia conseguir o ano atual sempre
+
+- Anotar na cabecalho da database o que eh cada campo
+
+- separar os campos da database com tab para ficar alinhado
+
+- Confirmar as informacoes durante o cadastro

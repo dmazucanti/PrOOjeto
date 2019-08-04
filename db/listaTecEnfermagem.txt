@@ -1,2 +1,3 @@
 2 - Tecnico de Enfermagem
 20001, 12834, Pedro, exame1, exame2, exame3
+20002, 1234, Jonas, todos
