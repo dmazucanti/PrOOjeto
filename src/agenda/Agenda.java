@@ -16,7 +16,7 @@ public class Agenda {
 	private static Agenda agenda;
 	
 	private Agenda() throws IOException {
-		br = new BufferedWriter(new FileWriter("agenda.txt"));
+		br = new BufferedWriter(new FileWriter("../db/agenda.txt"));
 		br.write("AGENDA 2019");
 		br.newLine();
 		br.flush();
@@ -32,7 +32,7 @@ public class Agenda {
 	private String recuperaNome(String idPac) throws FileNotFoundException{
 		String nomePaciente = "";
 		
-		Scanner scanPac = new Scanner(new File("listaPaciente.txt"));
+		Scanner scanPac = new Scanner(new File("../db/listaPaciente.txt"));
 		while(scanPac.hasNext()) {
 			String linePac = scanPac.nextLine().toString();
 			if(linePac.contains(idPac)) {
@@ -49,7 +49,7 @@ public class Agenda {
 		
 	//Recupera nome do mÃ©dico por meio do id
         if(args[2].equals("consulta") || args[2].equals("Consulta")) {
-        	Scanner scanMed = new Scanner(new File("listaMedico.txt"));
+        	Scanner scanMed = new Scanner(new File("../db/listaMedico.txt"));
         	while(scanMed.hasNext()) {
         		String lineMed = scanMed.nextLine().toString();
         		if(lineMed.contains(args[3])) {
@@ -61,7 +61,7 @@ public class Agenda {
         }
         else { 
 		//Recupera nome do tecnico por meio do id
-		Scanner scanTec = new Scanner(new File("listaTecEnfermagem.txt"));
+		Scanner scanTec = new Scanner(new File("../db/listaTecEnfermagem.txt"));
         	while(scanTec.hasNext()) {
         		String lineTec = scanTec.nextLine().toString();
         		if(lineTec.contains(args[3])) {
@@ -75,7 +75,7 @@ public class Agenda {
 	}
 	
 	public void visualizaAgenda() throws FileNotFoundException {	
-		Scanner scan = new Scanner(new File("agenda.txt"));
+		Scanner scan = new Scanner(new File("../db/agenda.txt"));
 		String line = scan.nextLine().toString();
 		System.out.println(line);
 		while(scan.hasNext()){
@@ -90,7 +90,7 @@ public class Agenda {
 	
 	public void visualizaAgenda(String id) throws FileNotFoundException {
 			
-		Scanner scan = new Scanner(new File("agenda.txt"));
+		Scanner scan = new Scanner(new File("../db/agenda.txt"));
 		String line = scan.nextLine().toString();
 		System.out.println(line);
 		while(scan.hasNext()){
@@ -110,7 +110,7 @@ public class Agenda {
 		String linha;
 		int quant = 0; 
 
-		buff = new BufferedReader(new FileReader("agenda.txt"));
+		buff = new BufferedReader(new FileReader("../db/agenda.txt"));
 		try {
 			linha = buff.readLine();
 			while (linha != null && quant < agenda.length-1) {
@@ -127,7 +127,7 @@ public class Agenda {
 	
 	public void desmarcaAgenda(String id, String data, String horario) throws IOException{
 		
-		Scanner scan = new Scanner(new File("agenda.txt"));
+		Scanner scan = new Scanner(new File("../db/agenda.txt"));
 		String linha = null;
 		while(scan.hasNext()){
 			String line = scan.nextLine().toString();
@@ -152,7 +152,7 @@ public class Agenda {
 		File file = new File("../db/agenda.txt");
 		file.delete();
 
-		BufferedWriter bw = new BufferedWriter(new FileWriter("agenda.txt"));
+		BufferedWriter bw = new BufferedWriter(new FileWriter("../db/agenda.txt"));
 
 
 		try {
@@ -167,18 +167,18 @@ public class Agenda {
 	public void marcaAgenda(String data, String horario, String tipo, String idFunc, String idPac) throws FileNotFoundException{
 		try {
 			String novaLinha = data + ", "+horario+", " + tipo + ", " + idFunc + ", " + idPac;
-			Scanner scan = new Scanner(new File("agenda.txt"));
+			Scanner scan = new Scanner(new File("../db/agenda.txt"));
 			while(scan.hasNext()){
 				String line = scan.nextLine().toString();
 				if(line.contains(novaLinha)){
-					throw new Exception("Este profissional nÃ£o estÃ¡ disponÃ­vel nesta data e horÃ¡rio");
+					throw new Exception("Este profissional nao esta disponivel nesta data e horario");
 				}
 			}
 			scan.close();
 			br.write(novaLinha);
 			br.newLine();
 			br.flush();
-			System.out.println("HorÃ¡rio agendado com sucesso!");
+			System.out.println("Horario agendado com sucesso!");
 		} catch (Exception e) {
 			System.out.println("Erro ao marcar na agenda: " + e);
 		}

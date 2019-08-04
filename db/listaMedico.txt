@@ -3,3 +3,4 @@
 30002, 55555, teste, Apoio emocional
 30003, 4, tesla, especial
 30004, jonas, jonas, jonas
+30005, 12834, Joao, Fisioterapia
