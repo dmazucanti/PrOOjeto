@@ -1,6 +1,7 @@
 package pessoa;
 
 import agenda.Agenda;
+import exames.Exames;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.BufferedWriter;
@@ -23,53 +24,78 @@ public class Atendente extends Administrador {
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
+		Exames exames = null;
+		try { 
+			exames = Exames.getInstance();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 		
-		int opcao;
-		
-		System.out.println("O que voce quer fazer?");
-		System.out.println("1 - Visualizar agenda");
-		System.out.println("2 - Cadastrar um novo usuario");
-		System.out.println("3 - Marcar um horario na agenda");
-		System.out.println("4 - Desmarcar um horario da agenda");
-		
-		opcao = scan.nextInt();
-		switch (opcao) {
-			case 1 :
-				visualizarAgenda();
-				break;
-			case 2 :
-				try {
-					cadastrar();
-				} catch (FileNotFoundException e) {
-					System.out.println(e.getMessage());
-				} catch (IOException e) {
-					System.out.println(e.getMessage());
-				}
-				break;
-			case 3 :
-				System.out.println("O que voce quer marcar? "); String tipo = scan.next();
-				System.out.print("Data: "); String data = scan.next();
-				System.out.print("Horario: "); String hora = scan.next();
-				System.out.print("ID funcionario: "); String idFunc = scan.next();
-				System.out.print("ID paciente: "); String idPac = scan.next();
-				
-				try {
-					agenda.marcaAgenda(data, hora, tipo, idFunc, idPac);
-				} catch (FileNotFoundException e) {
-					System.out.println(e.getMessage());
-				}
-				break;
-			case 4 :
-				System.out.println("Digite o id de quem esta desmarcando: "); String id = scan.next();
-				System.out.println("Digite a data: "); String datad = scan.next();
-				System.out.println("Digite o horario: "); String horario = scan.next();
-				
-				try {
-					agenda.desmarcaAgenda(id, datad, horario);
-				} catch (IOException e) {
-					System.out.println(e.getMessage());
-				}
-				break;
+		int opcao = 0;
+		while(opcao != 7) {
+			System.out.println("O que voce quer fazer?");
+			System.out.println("1 - Visualizar agenda");
+			System.out.println("2 - Cadastrar um novo usuario");
+			System.out.println("3 - Marcar um horario na agenda");
+			System.out.println("4 - Desmarcar um horario da agenda");
+			System.out.println("5 - Visualizar lista de exames");
+			System.out.println("6 - Registrar novo exame na lista");
+			System.out.println("7 - Sair da conta");
+			
+			opcao = scan.nextInt();
+			switch (opcao) {
+				case 1 :
+					visualizarAgenda();
+					break;
+				case 2 :
+					try {
+						cadastrar();
+					} catch (FileNotFoundException e) {
+						System.out.println(e.getMessage());
+					} catch (IOException e) {
+						System.out.println(e.getMessage());
+					}
+					break;
+				case 3 :
+					System.out.println("O que voce quer marcar? "); String tipo = scan.next();
+					System.out.print("Data: "); String data = scan.next();
+					System.out.print("Horario: "); String hora = scan.next();
+					System.out.print("ID funcionario: "); String idFunc = scan.next();
+					System.out.print("ID paciente: "); String idPac = scan.next();
+					
+					try {
+						agenda.marcaAgenda(data, hora, tipo, idFunc, idPac);
+					} catch (FileNotFoundException e) {
+						System.out.println(e.getMessage());
+					}
+					break;
+				case 4 :
+					System.out.println("Digite o id de quem esta desmarcando: "); String id = scan.next();
+					System.out.println("Digite a data: "); String datad = scan.next();
+					System.out.println("Digite o horario: "); String horario = scan.next();
+					
+					try {
+						agenda.desmarcaAgenda(id, datad, horario);
+					} catch (IOException e) {
+						System.out.println(e.getMessage());
+					}
+					break;
+				case 5:
+					try {
+						exames.visualizarExames();
+						break;
+					} catch (FileNotFoundException e) {
+						System.out.println(e.getMessage());
+					}
+				case 6:
+					System.out.println("Digite o nome do exame:"); String newExame = scan.next();
+					try {
+						exames.registraExame(newExame);
+						break;
+					} catch (FileNotFoundException e) {
+						System.out.println(e.getMessage());
+					}
+			}
 		}
 	}
 	
