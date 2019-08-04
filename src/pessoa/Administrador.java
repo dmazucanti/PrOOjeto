@@ -40,7 +40,11 @@ public abstract class Administrador extends Pessoa {
 		} while(!ok);
 	}
 
+	// Recebe do usuario o que ele deseja cadastrar
+	// e oferece a opcao de cancelar o cadastro
 	protected abstract int opcaoDeCadastro();
+
+	// Confirma o cancelamento caso seja requisitado
 	private boolean confirmaCancelamento() {
 		Scanner scan = new Scanner(System.in);
 
@@ -48,8 +52,13 @@ public abstract class Administrador extends Pessoa {
 		if(scan.next().charAt(0) == 'S') return true;
 		return false;
 	}
+
+	// Recebe as informacoes do usuario dependendo do tipo de pessoa que sera cadastrada
 	protected abstract String[] pegaInformacoes(int opcao);
+	// Devolve o caminho ate o arquivo referente a cada tipo de pessoa
 	protected abstract String tipoDeArquivo(int opcao);
+
+	// Escreve as informacoes do cadastrado recebidas por um vetor; em um arquivo da database
 	private void escreveInformacoes(String arquivo, String[] info) throws FileNotFoundException, IOException {
 		BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo, true));
 		String id = geraId(arquivo);
@@ -62,6 +71,8 @@ public abstract class Administrador extends Pessoa {
 			bw.close();
 		}
 	}
+
+	// Gera o proximo ID de um determinado tipo de pessoa
 	private String geraId(String arquivo) throws FileNotFoundException, IOException {
 		BufferedReader br = new BufferedReader(new FileReader(arquivo));
 
@@ -82,19 +93,27 @@ public abstract class Administrador extends Pessoa {
 		String idNovo;
 
 		if (fimDoId != -1) {
+			// Consegue o ultimo ID salvo no arquivo
 			String idAntigo = ultimaLinha.substring(0, ultimaLinha.indexOf(",")).trim();
 
+			// Incrementa o ID para gerar um novo
 			int tmp = Integer.parseInt(idAntigo);
 			tmp++;
 			idNovo = String.valueOf(tmp);
 		}
+		// Caso nao haja nenhum usuario cadastrado ainda, pega o identificador daquele tipo
+		// de usuario e cria o primeiro ID
 		else {
 			idNovo = ultimaLinha.charAt(0) + "0001";
 		}
 
 		return idNovo;
 	}
+
+	// Imprime uma mensagem personalizada de sucesso para cada tipo de cadastro
 	protected abstract void notificaSucesso(int opcao);
 
 }
 
+
+// Isso podia ser uma interface, mas haveria o problema de precisarmos do Java 8 para que houvesse implementacao
