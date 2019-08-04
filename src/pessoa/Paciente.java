@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
+import exames.Exames;
 public class Paciente extends Pessoa {
 	
 	private String sobrenome;
@@ -33,17 +33,24 @@ public class Paciente extends Pessoa {
 	public void menu () {
 		Scanner scan = new Scanner(System.in);
 		
-		int opcao;
+		int opcao = 0;
 		
-		System.out.println("O que voce quer fazer?");
-		System.out.println("1 - Visualizar agenda");
-		
-		opcao = scan.nextInt();
-		switch (opcao) {
-			case 1 :
-				visualizarAgenda();
-				break;
-		}		
+		while(opcao != 3) {
+			System.out.println("O que voce quer fazer?");
+			System.out.println("1 - Visualizar agenda");
+			System.out.println("2 - Visualizar lista de exames");
+			System.out.println("3 - Sair da conta");
+			
+			opcao = scan.nextInt();
+			switch (opcao) {
+				case 1 :
+					visualizarAgenda();
+					break;
+				case 2:
+					visualizarExames();
+					break;
+			}	
+		}
 	}
 	
 	@Override
@@ -56,6 +63,20 @@ public class Paciente extends Pessoa {
 		}
 		try {
 			agenda.visualizaAgenda(getId());
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void visualizarExames() {
+		Exames exames = null;
+		try { 
+			exames = Exames.getInstance();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			exames.visualizarExames();
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
