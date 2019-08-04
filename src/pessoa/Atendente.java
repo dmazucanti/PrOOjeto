@@ -84,7 +84,7 @@ public class Atendente extends Administrador {
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-		System.out.println("Digite 1 para visualizar a agenda geral, outro numero para visualizar a agenda de um usu�rio espec�fico: ");
+		System.out.println("Digite 1 para visualizar a agenda geral, outro numero para visualizar a agenda de um usuario especifico: ");
 		opcao = scan.nextInt();
 		if(opcao == 1) {
 			try {

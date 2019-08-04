@@ -1,4 +1,4 @@
-﻿package agenda;
+package agenda;
 
 import java.util.Scanner;
 import java.io.BufferedReader;
