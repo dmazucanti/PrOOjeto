@@ -4,6 +4,8 @@
 - No cadastro é pedido uma confirmação da senha
 - Senha nao pode ser vazia, com menos de X digitos etc
 
+- As senhas não são registradas literalmente, mas em hash
+
 - Todo usuário pode alterar sua própria senha
 	(talvez toda senha seja cadastrada de uma forma (ex.: 00000) e no primeiro login a pessoa é requisitada para alterar a senha.
 

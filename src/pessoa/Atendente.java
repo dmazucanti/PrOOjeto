@@ -2,13 +2,13 @@ package pessoa;
 
 import agenda.Agenda;
 import java.util.Scanner;
-//import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class Atendente extends Administrador {
+	
 	public Atendente(String id, String senha, String nome) throws VazioException {
 		super(id, senha, nome);
 	}
@@ -37,7 +37,6 @@ public class Atendente extends Administrador {
 			case 1 :
 				visualizarAgenda();
 				break;
-				
 			case 2 :
 				try {
 					cadastrar();
@@ -47,7 +46,6 @@ public class Atendente extends Administrador {
 					System.out.println(e.getMessage());
 				}
 				break;
-				
 			case 3 :
 				System.out.println("O que voce quer marcar? "); String tipo = scan.next();
 				System.out.print("Data: "); String data = scan.next();
@@ -61,7 +59,6 @@ public class Atendente extends Administrador {
 					System.out.println(e.getMessage());
 				}
 				break;
-				
 			case 4 :
 				System.out.println("Digite o id de quem esta desmarcando: "); String id = scan.next();
 				System.out.println("Digite a data: "); String datad = scan.next();
@@ -78,7 +75,32 @@ public class Atendente extends Administrador {
 	
 	@Override
 	public void visualizarAgenda(){
-		return;
+		Scanner scan = new Scanner (System.in);
+		Agenda agenda = null;
+		int opcao;
+		
+		try { 
+			agenda = Agenda.getInstance();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println("Digite 1 para visualizar a agenda geral, outro numero para visualizar a agenda de um usu�rio espec�fico: ");
+		opcao = scan.nextInt();
+		if(opcao == 1) {
+			try {
+				agenda.visualizaAgenda();
+			} catch (FileNotFoundException e) {
+				System.out.println(e.getMessage());
+			}
+		} else {
+			System.out.println("Digite o ID da pessoa cuja agenda voce quer visualizar: ");
+			String id = scan.next();
+			try {
+				agenda.visualizaAgenda(id);
+			} catch (FileNotFoundException e) {
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 
 

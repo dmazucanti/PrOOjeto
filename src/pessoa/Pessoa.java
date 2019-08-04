@@ -14,6 +14,8 @@ public abstract class Pessoa extends VazioException {
 	
 	public abstract void menu ();
 
+	public abstract void visualizarAgenda();
+	
 	public void setNome(String nome) throws VazioException {
 		if(!nome.isEmpty() && nome != null) 
 			this.nome = nome;
@@ -40,6 +42,4 @@ public abstract class Pessoa extends VazioException {
 	public String getSenha () {
 		return senha;
 	}
-
-	public abstract void visualizarAgenda();
 }

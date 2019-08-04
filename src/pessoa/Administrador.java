@@ -86,7 +86,6 @@ public abstract class Administrador extends Pessoa {
 		}
 		br.close();
 
-
 		// se fimDoId == -1, quer dizer que nao tem virgula no arquivo, ou seja, nao existem
 		// atendentes registrados
 		int fimDoId = ultimaLinha.indexOf(",");
@@ -106,7 +105,6 @@ public abstract class Administrador extends Pessoa {
 		else {
 			idNovo = ultimaLinha.charAt(0) + "0001";
 		}
-
 		return idNovo;
 	}
 

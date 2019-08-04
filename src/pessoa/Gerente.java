@@ -1,9 +1,8 @@
 package pessoa;
 
+import agenda.Agenda;
 import java.util.Scanner;
-import java.io.File;
 import java.io.FileNotFoundException;
-
 import java.io.IOException;
 
 public class Gerente extends Administrador {
@@ -22,28 +21,36 @@ public class Gerente extends Administrador {
 		System.out.println("1 - Visualizar agenda");
 		System.out.println("2 - Cadastrar um novo atendente");
 		
-		opcao = scan.nextInt();
+		int opcao = scan.nextInt();
 		switch (opcao) {
 			case 1 :
 				visualizarAgenda();
 				break;
 			case 2 :
 				try {
-				 cadastrar();
+					cadastrar();
 				} catch (FileNotFoundException e) {
 					e.getMessage();
 				} catch (IOException e) {
 					e.getMessage();
 				}
 				break;
-		}
-		
+		}	
 	}
-	
 	
 	@Override
 	public void visualizarAgenda() {
-		System.out.println("Agenda!");
+		Agenda agenda = null;
+		try { 
+			agenda = Agenda.getInstance();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			agenda.visualizaAgenda();
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	@Override
@@ -61,7 +68,6 @@ public class Gerente extends Administrador {
 		System.out.println("Cadastro de Atendente:");
 		System.out.print("Insira o nome: "); String nome = scan.next();
 		System.out.print("Insira uma senha: "); String senha = scan.next();
-		// System.out.print("Confirme a senha: "); String senhaConfirmacao = scan.next();
 
 		String info = "";
 		info = info.concat(senha).concat(" "+nome);
