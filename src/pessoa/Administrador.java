@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import login.criptog;
 
 
 public abstract class Administrador extends Pessoa {
@@ -64,7 +65,9 @@ public abstract class Administrador extends Pessoa {
 		String id = geraId(arquivo);
 		try {
 			bw.write(id + ", ");
-			for(int i=0; i < info.length-1; i++) bw.write(info[i] + ", "); 
+			int hash = criptog.hash(info[0]); //calcula o hash da senha
+			bw.write(hash + ", ");
+			for(int i=1; i < info.length-1; i++) bw.write(info[i] + ", "); 
 				bw.write(info[info.length-1] + "\r\n");
 				System.out.println("O ID gerado eh: " + id);
 		} finally {
