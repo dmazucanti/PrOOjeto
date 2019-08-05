@@ -2,6 +2,7 @@ package login;
 
 import pessoa.*;
 import java.util.*;
+import javax.swing.JOptionPane;
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -20,10 +21,9 @@ public class VerificaSenha{
 	}
 
 	public static Pessoa autenticar() throws UsuarioNaoAutenticadoException, FileNotFoundException, VazioException {
-		Scanner scanner = new Scanner(System.in);
 
-		System.out.println("Id:"); String id = scanner.next(); 
-		System.out.println("Senha:"); String senha = scanner.next(); 
+		String id = JOptionPane.showInputDialog("ID:");
+		String senha = JOptionPane.showInputDialog("Senha:");
 		int key = criptog.hash(senha);//calcula hash da entrada
 		Scanner instancia;
 		String retornoSenha = null;

@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import exames.Exames;
+import javax.swing.JOptionPane;
+
 public class Paciente extends Pessoa {
 	
 	private String sobrenome;
@@ -31,17 +33,14 @@ public class Paciente extends Pessoa {
 	
 	@Override
 	public void menu () {
-		Scanner scan = new Scanner(System.in);
+		//Scanner scan = new Scanner(System.in);
 		
 		int opcao = 0;
 		
 		while(opcao != 3) {
-			System.out.println("O que voce quer fazer?");
-			System.out.println("1 - Visualizar agenda");
-			System.out.println("2 - Visualizar lista de exames");
-			System.out.println("3 - Sair da conta");
 			
-			opcao = scan.nextInt();
+			opcao = Integer.parseInt(JOptionPane.showInputDialog("O que você quer fazer?\n1 - Visualizar agenda\n2 - Visualizar lista de exames\n3 - Sair da conta"));
+
 			switch (opcao) {
 				case 1 :
 					visualizarAgenda();
@@ -163,7 +162,7 @@ public class Paciente extends Pessoa {
 	}
 	
 	public void setOrtopedista(String ortopedista) throws FileNotFoundException{
-		if (!ortopedista.isEmpty() && ortopedista!=null && profissionalExiste(ortopedista, "../../db/listaMedico.txt")) {
+		if (!ortopedista.isEmpty() && ortopedista!=null && profissionalExiste(ortopedista, "listaMedico.txt")) {
 			this.ortopedista = ortopedista;
 		}
 	}
@@ -173,7 +172,7 @@ public class Paciente extends Pessoa {
 	}
 	
 	public void setFisiatra(String fisiatra) throws FileNotFoundException{
-		if (!fisiatra.isEmpty() && fisiatra!=null && profissionalExiste(fisiatra, "../../db/listaTecEnfermagem.txt")) {
+		if (!fisiatra.isEmpty() && fisiatra!=null && profissionalExiste(fisiatra, "listaTecEnfermagem.txt")) {
 			this.fisiatra = fisiatra;
 		}
 	}

@@ -1,7 +1,7 @@
 package pessoa;
 
 import agenda.Agenda;
-import java.util.Scanner;
+import javax.swing.JOptionPane;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -13,15 +13,10 @@ public class Gerente extends Administrador {
 
 	@Override
 	public void menu () {
-		Scanner scan = new Scanner(System.in);
 		int opcao = 0;
 		while(opcao != 3) {
-			System.out.println("O que voce quer fazer?");
-			System.out.println("1 - Visualizar agenda");
-			System.out.println("2 - Cadastrar um novo atendente");
-			System.out.println("3 - Sair da conta");
+			opcao = Integer.parseInt(JOptionPane.showInputDialog("O que você quer fazer?\n1 - Visualizar agenda\n2 - Cadastrar um novo atendente\n3 - Sair da conta"));
 			
-			opcao = scan.nextInt();
 			switch (opcao) {
 				case 1 :
 					visualizarAgenda();
@@ -56,20 +51,18 @@ public class Gerente extends Administrador {
 
 	@Override
 	protected int opcaoDeCadastro() {
-		Scanner scan = new Scanner(System.in);
-		System.out.println("Digite: [C] para cancelar e qualquer outra tecla para continuar");
-		if (scan.next().charAt(0) == 'C') return -1;
+
+		if ((JOptionPane.showInputDialog("Digite: [C] para cancelar e qualquer outra tecla para continuar")).charAt(0) == 'C') return -1;
 		return 4;
 	}
 
 	@Override
 	protected String[] pegaInformacoes(int opcao) {
 		// Pegando informacoes / interagindo com o usuario
-		Scanner scan = new Scanner(System.in);
-		System.out.println("Cadastro de Atendente:");
-		System.out.print("Insira o nome: "); String nome = scan.next();
-		System.out.print("Insira uma senha: "); String senha = scan.next();
-
+		
+		String nome = JOptionPane.showInputDialog("Cadastro de Atendente:\nInsira o nome: ");
+		String senha = JOptionPane.showInputDialog("Cadastro de Atendente:\nInsira uma senha: ");
+		
 		String info = "";
 		info = info.concat(senha).concat(" "+nome);
 
@@ -80,7 +73,7 @@ public class Gerente extends Administrador {
 
 	@Override
 	protected String tipoDeArquivo(int opcao) {
-		return "../db/listaAtendente.txt";
+		return "listaAtendente.txt";
 	}
 
 	@Override

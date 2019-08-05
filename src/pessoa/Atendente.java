@@ -3,9 +3,8 @@ package pessoa;
 import agenda.Agenda;
 import exames.Exames;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 import java.io.FileNotFoundException;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class Atendente extends Administrador {
@@ -16,7 +15,6 @@ public class Atendente extends Administrador {
 	
 	@Override
 	public void menu () {
-		Scanner scan = new Scanner(System.in);
 		
 		Agenda agenda = null;
 		try { 
@@ -33,16 +31,10 @@ public class Atendente extends Administrador {
 		
 		int opcao = 0;
 		while(opcao != 7) {
-			System.out.println("O que voce quer fazer?");
-			System.out.println("1 - Visualizar agenda");
-			System.out.println("2 - Cadastrar um novo usuario");
-			System.out.println("3 - Marcar um horario na agenda");
-			System.out.println("4 - Desmarcar um horario da agenda");
-			System.out.println("5 - Visualizar lista de exames");
-			System.out.println("6 - Registrar novo exame na lista");
-			System.out.println("7 - Sair da conta");
-			
-			opcao = scan.nextInt();
+			opcao = Integer.parseInt(JOptionPane.showInputDialog("O que você quer fazer?\n1 - Visualizar agenda\n"
+					+ "2 - Cadastrar um novo usuario\n3 - Marcar um horario na agenda\n4 - Desmarcar um horario da agenda\n"
+					+ "5 - Visualizar lista de exames\n6 - Registrar novo exame na lista\n7 - Sair da conta"));
+
 			switch (opcao) {
 				case 1 :
 					visualizarAgenda();
@@ -57,12 +49,11 @@ public class Atendente extends Administrador {
 					}
 					break;
 				case 3 :
-					System.out.println("O que voce quer marcar? "); String tipo = scan.next();
-					System.out.print("Data: "); String data = scan.next();
-					System.out.print("Horario: "); String hora = scan.next();
-					System.out.print("ID funcionario: "); String idFunc = scan.next();
-					System.out.print("ID paciente: "); String idPac = scan.next();
-					
+					String tipo = JOptionPane.showInputDialog("O que você quer marcar?");
+					String data = JOptionPane.showInputDialog("Data");
+					String hora = JOptionPane.showInputDialog("Horário");
+					String idFunc = JOptionPane.showInputDialog("ID funcionário");
+					String idPac = JOptionPane.showInputDialog("ID paciente");
 					try {
 						agenda.marcaAgenda(data, hora, tipo, idFunc, idPac);
 					} catch (FileNotFoundException e) {
@@ -70,9 +61,9 @@ public class Atendente extends Administrador {
 					}
 					break;
 				case 4 :
-					System.out.println("Digite o id de quem esta desmarcando: "); String id = scan.next();
-					System.out.println("Digite a data: "); String datad = scan.next();
-					System.out.println("Digite o horario: "); String horario = scan.next();
+					String id = JOptionPane.showInputDialog("Digite o ID de quem pediu para desmarcar");
+					String datad = JOptionPane.showInputDialog("Data");
+					String horario = JOptionPane.showInputDialog("Horario");
 					
 					try {
 						agenda.desmarcaAgenda(id, datad, horario);
@@ -88,7 +79,7 @@ public class Atendente extends Administrador {
 						System.out.println(e.getMessage());
 					}
 				case 6:
-					System.out.println("Digite o nome do exame:"); String newExame = scan.next();
+					String newExame = JOptionPane.showInputDialog("Digite o nome do exame:");
 					try {
 						exames.registraExame(newExame);
 						break;
@@ -101,17 +92,16 @@ public class Atendente extends Administrador {
 	
 	@Override
 	public void visualizarAgenda(){
-		Scanner scan = new Scanner (System.in);
 		Agenda agenda = null;
-		int opcao;
 		
 		try { 
 			agenda = Agenda.getInstance();
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-		System.out.println("Digite 1 para visualizar a agenda geral, outro numero para visualizar a agenda de um usuario especifico: ");
-		opcao = scan.nextInt();
+		int opcao = Integer.parseInt(JOptionPane.showInputDialog("Digite 1 para visualizar a agenda "
+				+ "geral, outro numero para visualizar a agenda de um usuario especifico"));
+
 		if(opcao == 1) {
 			try {
 				agenda.visualizaAgenda();
@@ -119,8 +109,8 @@ public class Atendente extends Administrador {
 				System.out.println(e.getMessage());
 			}
 		} else {
-			System.out.println("Digite o ID da pessoa cuja agenda voce quer visualizar: ");
-			String id = scan.next();
+			String id = JOptionPane.showInputDialog("Digite o ID da pessoa cuja agenda voce quer visualizar: ");
+
 			try {
 				agenda.visualizaAgenda(id);
 			} catch (FileNotFoundException e) {
@@ -133,14 +123,10 @@ public class Atendente extends Administrador {
 	@Override
 	protected int opcaoDeCadastro() {
 		// Pegando informacoes / interagindo com o usuario
-		Scanner scan = new Scanner(System.in);
 
-		System.out.println("Escolha a opcao de cadastro:");
-		System.out.println("[1] Paciente, [2] Tecnico de Enfermagem, [3] Medico, [Outro] Cancela Cadastro");
-		// Pode gerar uma InputMismatchException
-		// int opcao = scan.nextInt();
-		
-		String tmp = scan.next();
+		String tmp = JOptionPane.showInputDialog("Escolha a opcao de cadastro:\n[1] Paciente\n"
+				+ "[2] Tecnico de Enfermagem\n[3] Medico\n[Outro] Cancela Cadastro");
+
 		int opcao = 0;
 		try {
 			opcao = Integer.parseInt(tmp);
@@ -200,11 +186,11 @@ public class Atendente extends Administrador {
 	protected String tipoDeArquivo(int opcao) {
 		switch (opcao) {
 			case 1:
-				return "../db/listaPaciente.txt";
+				return "listaPaciente.txt";
 			case 2:
-				return "../db/listaTecEnfermagem.txt";
+				return "listaTecEnfermagem.txt";
 			default:
-				return "../db/listaMedico.txt";
+				return "listaMedico.txt";
 		}
 	}
 	@Override

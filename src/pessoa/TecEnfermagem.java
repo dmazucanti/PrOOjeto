@@ -1,9 +1,9 @@
 package pessoa;
 
 import agenda.Agenda;
-import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 
 public class TecEnfermagem extends Pessoa {
 
@@ -16,15 +16,11 @@ public class TecEnfermagem extends Pessoa {
 
 	@Override
 	public void menu () {
-		Scanner scan = new Scanner(System.in);
 		
 		int opcao = 0;
 		while(opcao != 2) {
-			System.out.println("O que voce quer fazer?");
-			System.out.println("1 - Visualizar agenda");
-			System.out.println("2 - Sair da conta");
-			
-			opcao = scan.nextInt();
+			opcao = Integer.parseInt(JOptionPane.showInputDialog("O que voce quer fazer?\n1 - Visualizar agenda\n2 - Sair da conta"));
+
 			switch (opcao) {
 				case 1 :
 					visualizarAgenda();

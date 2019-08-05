@@ -1,15 +1,12 @@
 package pessoa;
 
 import java.io.FileNotFoundException;
-
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
-
-import java.util.Scanner;
-import java.util.InputMismatchException;
+import javax.swing.JOptionPane;
 import login.criptog;
 
 
@@ -47,10 +44,8 @@ public abstract class Administrador extends Pessoa {
 
 	// Confirma o cancelamento caso seja requisitado
 	private boolean confirmaCancelamento() {
-		Scanner scan = new Scanner(System.in);
-
-		System.out.println("Cancelar?: [S] Cancela, [Outro] continua");
-		if(scan.next().charAt(0) == 'S') return true;
+		
+		if ((JOptionPane.showInputDialog("Cancelar?\n[S] Cancela\n[Outro] continua")).charAt(0) == 'S') return true;
 		return false;
 	}
 

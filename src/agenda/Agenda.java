@@ -1,4 +1,4 @@
-package agenda;
+﻿package agenda;
 
 import java.util.Scanner;
 import java.io.BufferedReader;
@@ -16,7 +16,7 @@ public class Agenda {
 	private static Agenda agenda;
 	
 	private Agenda() throws IOException {
-		br = new BufferedWriter(new FileWriter("../db/agenda.txt"));
+		br = new BufferedWriter(new FileWriter("agenda.txt"));
 		br.write("AGENDA 2019");
 		br.newLine();
 		br.flush();
@@ -32,7 +32,7 @@ public class Agenda {
 	private String recuperaNome(String idPac) throws FileNotFoundException{
 		String nomePaciente = "";
 		
-		Scanner scanPac = new Scanner(new File("../db/listaPaciente.txt"));
+		Scanner scanPac = new Scanner(new File("listaPaciente.txt"));
 		while(scanPac.hasNext()) {
 			String linePac = scanPac.nextLine().toString();
 			if(linePac.contains(idPac)) {
@@ -47,9 +47,9 @@ public class Agenda {
 	private String recuperaNome(String[] args) throws FileNotFoundException{
 		String nomeProfissional = "";
 		
-	//Recupera nome do mÃ©dico por meio do id
+		//Recupera nome do medico por meio do id
         if(args[2].equals("consulta") || args[2].equals("Consulta")) {
-        	Scanner scanMed = new Scanner(new File("../db/listaMedico.txt"));
+        	Scanner scanMed = new Scanner(new File("listaMedico.txt"));
         	while(scanMed.hasNext()) {
         		String lineMed = scanMed.nextLine().toString();
         		if(lineMed.contains(args[3])) {
@@ -61,7 +61,7 @@ public class Agenda {
         }
         else { 
 		//Recupera nome do tecnico por meio do id
-		Scanner scanTec = new Scanner(new File("../db/listaTecEnfermagem.txt"));
+		Scanner scanTec = new Scanner(new File("listaTecEnfermagem.txt"));
         	while(scanTec.hasNext()) {
         		String lineTec = scanTec.nextLine().toString();
         		if(lineTec.contains(args[3])) {
@@ -75,7 +75,7 @@ public class Agenda {
 	}
 	
 	public void visualizaAgenda() throws FileNotFoundException {	
-		Scanner scan = new Scanner(new File("../db/agenda.txt"));
+		Scanner scan = new Scanner(new File("agenda.txt"));
 		String line = scan.nextLine().toString();
 		System.out.println(line);
 		while(scan.hasNext()){
@@ -90,7 +90,7 @@ public class Agenda {
 	
 	public void visualizaAgenda(String id) throws FileNotFoundException {
 			
-		Scanner scan = new Scanner(new File("../db/agenda.txt"));
+		Scanner scan = new Scanner(new File("agenda.txt"));
 		String line = scan.nextLine().toString();
 		System.out.println(line);
 		while(scan.hasNext()){
@@ -110,7 +110,7 @@ public class Agenda {
 		String linha;
 		int quant = 0; 
 
-		buff = new BufferedReader(new FileReader("../db/agenda.txt"));
+		buff = new BufferedReader(new FileReader("agenda.txt"));
 		try {
 			linha = buff.readLine();
 			while (linha != null && quant < agenda.length-1) {
@@ -118,7 +118,7 @@ public class Agenda {
 				quant++;
 				linha = buff.readLine();
 			}
-			System.out.println("O arquivo foi lido e carregado para a memoria!");
+			//System.out.println("O arquivo foi lido e carregado para a memoria!");
 		} finally {
 			buff.close();
 		}
@@ -127,7 +127,7 @@ public class Agenda {
 	
 	public void desmarcaAgenda(String id, String data, String horario) throws IOException{
 		
-		Scanner scan = new Scanner(new File("../db/agenda.txt"));
+		Scanner scan = new Scanner(new File("agenda.txt"));
 		String linha = null;
 		while(scan.hasNext()){
 			String line = scan.nextLine().toString();
@@ -149,10 +149,10 @@ public class Agenda {
 			i++;
 		}
 		
-		File file = new File("../db/agenda.txt");
+		File file = new File("agenda.txt");
 		file.delete();
 
-		BufferedWriter bw = new BufferedWriter(new FileWriter("../db/agenda.txt"));
+		BufferedWriter bw = new BufferedWriter(new FileWriter("agenda.txt"));
 
 
 		try {
@@ -167,7 +167,7 @@ public class Agenda {
 	public void marcaAgenda(String data, String horario, String tipo, String idFunc, String idPac) throws FileNotFoundException{
 		try {
 			String novaLinha = data + ", "+horario+", " + tipo + ", " + idFunc + ", " + idPac;
-			Scanner scan = new Scanner(new File("../db/agenda.txt"));
+			Scanner scan = new Scanner(new File("agenda.txt"));
 			while(scan.hasNext()){
 				String line = scan.nextLine().toString();
 				if(line.contains(novaLinha)){
