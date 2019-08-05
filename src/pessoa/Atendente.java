@@ -2,7 +2,6 @@ package pessoa;
 
 import agenda.Agenda;
 import exames.Exames;
-import java.util.Scanner;
 import javax.swing.JOptionPane;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -138,42 +137,29 @@ public class Atendente extends Administrador {
 	}
 	@Override
 	protected String[] pegaInformacoes(int opcao) {
-		Scanner scan = new Scanner(System.in);
 
 		String extrasProfissao = "";
-		System.out.print("Insira o nome: "); String nome = scan.nextLine();
+		String nome = JOptionPane.showInputDialog("Insira o nome:");
 		switch (opcao) {
 			case 1:
-				System.out.print("Insira o sobrenome: ");
-				extrasProfissao = extrasProfissao.concat(scan.nextLine() + " ");
-				System.out.print("Insira o sexo: ");
-				extrasProfissao = extrasProfissao.concat(scan.nextLine() + " ");
-				System.out.print("Insira a idade: ");
-				extrasProfissao = extrasProfissao.concat(scan.nextLine() + " ");
-				System.out.print("Insira a altura: ");
-				extrasProfissao = extrasProfissao.concat(scan.nextLine() + " ");
-				System.out.print("Insira o peso: ");
-				extrasProfissao = extrasProfissao.concat(scan.nextLine() + " ");
-				System.out.print("Insira o telefone: ");
-				extrasProfissao = extrasProfissao.concat(scan.nextLine() + " ");
-				System.out.print("Insira o e-mail: ");
-				extrasProfissao = extrasProfissao.concat(scan.nextLine() + " ");
-				System.out.print("Insira o ortopedista: ");
-				extrasProfissao = extrasProfissao.concat(scan.nextLine() + " ");
-				System.out.print("Insira o fisiatra: ");
-				extrasProfissao = extrasProfissao.concat(scan.nextLine());
+				extrasProfissao = extrasProfissao.concat(JOptionPane.showInputDialog("Insira o sobrenome:") + " ");
+				extrasProfissao = extrasProfissao.concat(JOptionPane.showInputDialog("Insira o sexo:") + " ");
+				extrasProfissao = extrasProfissao.concat(JOptionPane.showInputDialog("Insira a idade:") + " ");
+				extrasProfissao = extrasProfissao.concat(JOptionPane.showInputDialog("Insira a altura :") + " ");
+				extrasProfissao = extrasProfissao.concat(JOptionPane.showInputDialog("Insira o peso:") + " ");
+				extrasProfissao = extrasProfissao.concat(JOptionPane.showInputDialog("Insira o telefone:") + " ");
+				extrasProfissao = extrasProfissao.concat(JOptionPane.showInputDialog("Insira o e-mail:") + " ");
+				extrasProfissao = extrasProfissao.concat(JOptionPane.showInputDialog("Insira o ortopedista:") + " ");
+				extrasProfissao = extrasProfissao.concat(JOptionPane.showInputDialog("Insira o fisiatra:"));
 				break;
 			case 2:
-				// Decidir formato
-				System.out.print("Insira os tipos de exames: ");
-				extrasProfissao = extrasProfissao.concat(scan.nextLine());
+				extrasProfissao = extrasProfissao.concat(JOptionPane.showInputDialog("Insira os tipos de exames: "));
 				break;
 			case 3:
-				System.out.print("Indique a especialidade: ");
-				extrasProfissao = extrasProfissao.concat(scan.nextLine());
+				extrasProfissao = extrasProfissao.concat(JOptionPane.showInputDialog("Indique a especialidade: "));
 				break;
 		}
-		System.out.print("Insira uma senha: "); String senha = scan.nextLine();
+		String senha = JOptionPane.showInputDialog("Insira uma senha: ");
 
 		String info = "";
 		info = info.concat(senha+" ").concat(nome+" ").concat(extrasProfissao);
